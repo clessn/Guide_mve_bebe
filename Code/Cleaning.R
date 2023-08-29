@@ -186,9 +186,27 @@ Clean$guide_use_2gros[Raw$Guide_use_2 == "Trop gros format (décourageant)"] <- 
 Clean$guide_use_2compliqué <- 0
 Clean$guide_use_2compliqué[Raw$Guide_use_2 == "Trop compliqué à comprendre"] <- 1
 
-# !!!!! À FAIRE !!!!!
 table(Raw$Guide_use_2_6_TEXT)
-# !!!!! À FAIRE !!!!!
+
+Clean$guide_use_2numérique <- 0
+Clean$guide_use_2numérique[Raw$Guide_use_2_6_TEXT == "J’aime mieux l’information numérique plutôt que papier"] <- 1
+Clean$guide_use_2erreur <- 0
+Clean$guide_use_2erreur[Raw$Guide_use_2_6_TEXT == "Je me suis trompé, oui je l’ai consulté à plusieurs reprises "] <- 1
+Clean$guide_use_2thirdkid <- 0
+Clean$guide_use_2thirdkid[Raw$Guide_use_2_6_TEXT == "C'est  mon 3e enfant"] <- 1
+Clean$guide_use_2nokidyet <- 0
+Clean$guide_use_2nokidyet[Raw$Guide_use_2_6_TEXT == "Je n’ai pas encore mon enfant "] <- 1
+Clean$guide_use_2nokidyet[Raw$Guide_use_2_6_TEXT == "Regarder seulement a mon premier enfant"] <- 1
+Clean$guide_use_2pasrecu <- 0
+Clean$guide_use_2pasrecu[Raw$Guide_use_2_6_TEXT == "Je ne l’ai pas recu"] <- 1
+Clean$guide_use_2pasrecu[Raw$Guide_use_2_6_TEXT == "Je n’ai pas de copie"] <- 1
+Clean$guide_use_2pasrecu[Raw$Guide_use_2_6_TEXT == "Je ne l'ai pas reçu lors de mes suivis"] <- 1
+Clean$guide_use_2paspratique <- 0
+Clean$guide_use_2paspratique[Raw$Guide_use_2_6_TEXT == "Peu pratique à consulter, information difficile à trouver"] <- 1
+Clean$guide_use_2autreguide <- 0
+Clean$guide_use_2autreguide[Raw$Guide_use_2_6_TEXT == "J’avais déjà « naître et grandir »"] <- 1
+Clean$guide_use_2didntknow <- 0
+Clean$guide_use_2didntknow[Raw$Guide_use_2_6_TEXT == "Je ne savais pas qu'il existait"] <- 1
 
 table(Raw$guide_reception_1)
 
@@ -201,9 +219,24 @@ Clean$guide_reception_pdf[Raw$guide_reception_1 =="On m’a transféré le PDF d
 Clean$guide_reception_autonome <- 0
 Clean$guide_reception_autonome[Raw$guide_reception_1 =="On ne me l’a pas remis mais j’y ai accédé par mes propres moyens"] <- 1
 
-# !!!!! À FAIRE !!!!!
 table(Raw$guide_reception_1_6_TEXT)
-# !!!!! À FAIRE !!!!!
+
+Clean$guide_reception_amie <- 0
+Clean$guide_reception_amie[Raw$guide_reception_1 =="Amie m’a donné le guide papier"] <- 1
+Clean$guide_reception_soeur <- 0
+Clean$guide_reception_soeur[Raw$guide_reception_1 =="De ma soeur"] <- 1
+Clean$guide_reception_france <- 0
+Clean$guide_reception_france[Raw$guide_reception_1 =="Donné par quelqu'un (grossesse et accouchement en France)"] <- 1
+Clean$guide_reception_autreversion <- 0
+Clean$guide_reception_autreversion[Raw$guide_reception_1 =="Il y a plusieurs années ont m’a remis le format livre et ensuite on m’a dirigé vers le web"] <- 1
+Clean$guide_reception_autreversion[Raw$guide_reception_1 =="On m'avait remis la version papier à la naissance de ma fille mais plusieurs choses avait changé lors de ma deuxième grossesse et j'ai trouvé par moi-même ma version web"] <- 1
+Clean$guide_reception_autreversion[Raw$guide_reception_1 =="On me l’a remis à ma première grossesse il y a 10 ans"] <- 1
+Clean$guide_reception_médecin <- 0
+Clean$guide_reception_médecin[Raw$guide_reception_1 =="J'ai demandé à ma médecin de famille de me le donner "] <- 1
+Clean$guide_reception_cpe <- 0
+Clean$guide_reception_cpe[Raw$guide_reception_1 =="Je suis éducatrice en cpe"] <- 1
+Clean$guide_reception_proche <- 0
+Clean$guide_reception_proche[Raw$guide_reception_1 =="Un proche me l’a donné "] <- 1
 
 table(Raw$guide_use_format)
 
@@ -535,3 +568,162 @@ table(Raw$comments)
 
 
 # Block 4 - SES ---------------------------------------------------------------
+
+table(Raw$ses_link_kid)
+table(Raw$ses_link_kid_5_TEXT)
+
+Clean$ses_link_kidmom <- 0
+Clean$ses_link_kidmom[Raw$ses_link_kid == "Mère"] <- 1
+Clean$ses_link_kiddad <- 0
+Clean$ses_link_kiddad[Raw$ses_link_kid == "Père"] <- 1
+Clean$ses_link_kidstepdad <- 0
+Clean$ses_link_kidstepdad[Raw$ses_link_kid == "Partenaire de la mère"] <- 1
+Clean$ses_link_kidstepmom <- 0
+Clean$ses_link_kidstepmom[Raw$ses_link_kid == "Partenaire du père"] <- 1
+
+table(Raw$ses_age)
+
+Clean$ses_age1829 <- 0
+Clean$ses_age1829[Raw$ses_age == "18-29"] <-1
+Clean$ses_age3039 <- 0
+Clean$ses_age3039[Raw$ses_age == "30-39"] <-1
+Clean$ses_age4049 <- 0
+Clean$ses_age4049[Raw$ses_age == "40-49"] <-1
+Clean$ses_age50 <- 0
+Clean$ses_age50[Raw$ses_age == "50 ou plus"] <-1
+
+table(Raw$ses_sex_ori)
+
+Clean$ses_couple <- 0
+Clean$ses_couple[Raw$ses_sex_ori == "Autre"] <- 1
+Clean$ses_couple <- 0
+Clean$ses_couple[Raw$ses_sex_ori == "Couple"] <- 1
+Clean$ses_couple <- 0
+Clean$ses_couple[Raw$ses_sex_ori == "Famille monoparentale"] <- 1
+
+table(Raw$ses_immigrant)
+
+Clean$ses_canada <- NA
+Clean$ses_canada[Raw$ses_immigrant == "Non"] <- 0
+Clean$ses_canada[Raw$ses_immigrant == "Oui"] <- 1
+
+table(Raw$ses_immigrant_year)
+table(Raw$ses_immigrant_year_1_TEXT)
+
+Clean$ses_immigrant_year <- NA
+Clean$ses_immigrant_year <- Raw$ses_immigrant_year
+
+table(Raw$ses_language)
+table(Raw$ses_language_3_TEXT)
+
+Clean$ses_languageboth <- 0
+Clean$ses_languageboth[Raw$ses_sex_ori == "Anglais et français egale"] <- 1
+Clean$ses_languageboth[Raw$ses_sex_ori == "Français et anglais"] <- 1
+Clean$ses_languageboth[Raw$ses_sex_ori == "Les deux"] <- 1
+Clean$ses_languageeng <- 0
+Clean$ses_languageeng[Raw$ses_sex_ori == "Anglais"] <- 1
+Clean$ses_languagefr <- 0
+Clean$ses_languagefr[Raw$ses_sex_ori == "Français"] <- 1
+Clean$ses_languagearab <- 0
+Clean$ses_languagearab[Raw$ses_sex_ori == "Arabe"] <- 1
+
+table(Raw$ses_kids_1)
+Clean$ses_kids <- 0
+Clean$ses_kids <- Raw$ses_kids_1
+
+table(Raw$ses_region_3)
+
+Clean$ses_regionabitibi <- 0
+Clean$ses_regionabitibi[Raw$ses_region_3 == "Abitibi-Témiscamingue"] <- 1
+Clean$ses_regionchaudiere <- 0
+Clean$ses_regionchaudiere[Raw$ses_region_3 == "Chaudière-Appalaches"] <- 1
+Clean$ses_regioniles <- 0
+Clean$ses_regioniles[Raw$ses_region_3 == "Gaspésie-Îles-de-la-Madeleine"] <- 1
+Clean$ses_regionmauricie <- 0
+Clean$ses_regionmauricie[Raw$ses_region_3 == "Mauricie"] <- 1
+Clean$ses_regionoutaouais <- 0
+Clean$ses_regionoutaouais[Raw$ses_region_3 == "Outaouais"] <- 1
+Clean$ses_regionbasstlaur <- 0
+Clean$ses_regionbasstlaur[Raw$ses_region_3 == "Bas-Saint-Laurent"] <- 1
+Clean$ses_regioncotenord <- 0
+Clean$ses_regioncotenord[Raw$ses_region_3 == "Côte-Nord"] <- 1
+Clean$ses_regionlanaudiere <- 0
+Clean$ses_regionlanaudiere[Raw$ses_region_3 == "Lanaudière"] <- 1
+Clean$ses_regionmonteregie <- 0
+Clean$ses_regionmonteregie[Raw$ses_region_3 == "Montérégie"] <- 1
+Clean$ses_regionsaguenay <- 0
+Clean$ses_regionsaguenay[Raw$ses_region_3 == "Saguenay-Lac-Saint-Jean"] <- 1
+Clean$ses_regionquebec <- 0
+Clean$ses_regionquebec[Raw$ses_region_3 == "Capitale-Nationale"] <- 1
+Clean$ses_regiondehors <- 0
+Clean$ses_regiondehors[Raw$ses_region_3 == "En dehors de Québec"] <- 1
+Clean$ses_regionlaurentides <- 0
+Clean$ses_regionlaurentides[Raw$ses_region_3 == "Laurentides"] <- 1
+Clean$ses_regionmtl <- 0
+Clean$ses_regionmtl[Raw$ses_region_3 == "Montréal"] <- 1
+Clean$ses_regioncentreduqc <- 0
+Clean$ses_regioncentreduqc[Raw$ses_region_3 == "Centre-du-Québec"] <- 1
+Clean$ses_regionestrie <- 0
+Clean$ses_regionestrie[Raw$ses_region_3 == "Estrie"] <- 1
+Clean$ses_regionlaval <- 0
+Clean$ses_regionlaval[Raw$ses_region_3 == "Laval"] <- 1
+Clean$ses_regionnordduqc <- 0
+Clean$ses_regionnordduqc[Raw$ses_region_3 == "Nord-du-Québec"] <- 1
+
+# ERREUR DANS UNE RÉPONSE : AURAIT DU ÊTRE EN DEHORS DU QUÉBEC, PAS EN DEHORS DE QUÉBEC
+
+table(Raw$ses_education)
+
+Clean$ses_educationsans5 <- 0
+Clean$ses_educationsans5[Raw$ses_education == "Secondaire sans diplôme de secondaire V"] <- 1
+Clean$ses_educationmaitrise <- 0
+Clean$ses_educationmaitrise[Raw$ses_education == "Universitaire maîtrise"] <- 1
+Clean$ses_educationautre <- 0
+Clean$ses_educationautre[Raw$ses_education == "Autre formation -spécifier-"] <- 1
+Clean$ses_educationprimaire <- 0
+Clean$ses_educationprimaire[Raw$ses_education == "Primaire"] <- 1
+Clean$ses_educationbacc <- 0
+Clean$ses_educationbacc[Raw$ses_education == "Universitaire baccalauréat"] <- 1
+Clean$ses_educationcollegial <- 0
+Clean$ses_educationcollegial[Raw$ses_education == "Collégial -préciser-"] <- 1
+Clean$ses_educationavec5 <- 0
+Clean$ses_educationavec5[Raw$ses_education == "Secondaire avec diplôme de secondaire V"] <- 1
+Clean$ses_educationphd <- 0
+Clean$ses_educationphd[Raw$ses_education == "Universitaire doctorat"] <- 1
+
+# !!!!! À FAIRE !!!!!
+table(Raw$ses_education_4_TEXT)
+table(Raw$ses_education_8_TEXT)
+# !!!!! À FAIRE !!!!!
+
+table(Raw$ses_job)
+
+Clean$ses_jobautre <- 0
+Clean$ses_jobautre[Raw$ses_job == "Autre -spécifier-"] <- 1
+Clean$ses_jobnojob <- 0
+Clean$ses_jobnojob[Raw$ses_job == "Sans emploi"] <- 1
+Clean$ses_jobpartiel <- 0
+Clean$ses_jobpartiel[Raw$ses_job == "Employé à temps partiel"] <- 1
+Clean$ses_jobautonome <- 0
+Clean$ses_jobautonome[Raw$ses_job == "Travailleur autonome"] <- 1
+Clean$ses_jobfulltime <- 0
+Clean$ses_jobfulltime[Raw$ses_job == "Employé à temps plein"] <- 1
+Clean$ses_jobstudent <- 0
+Clean$ses_jobstudent[Raw$ses_job == "Étudiant"] <- 1
+
+# !!!!! À FAIRE !!!!!
+table(Raw$ses_job_6_TEXT)
+# !!!!! À FAIRE !!!!!
+
+table(Raw$ses_income_1)
+Clean$ses_persoincome <- NA
+Clean$ses_persoincome[Raw$ses_income_1 %in% c("Moins de 10,000 $", "10,000 $ à 14,999 $", "15,000 $ à 29,999 $", "30,000 $ à 39,999 $")] <- 0
+Clean$ses_persoincome[Raw$ses_income_1 %in% c("40,000 $ à 59,999 $", "60,000 $ à 79,999 $", "80,000 $ à 99,999 $")] <- 0.5
+Clean$ses_persoincome[Raw$ses_income_1 %in% c("100,000 $ et plus")] <- 1
+
+
+table(Raw$ses_income_2)
+Clean$ses_houseincome <- NA
+Clean$ses_houseincome[Raw$ses_income_2 %in% c("Moins de 10,000 $", "10,000 $ à 14,999 $", "15,000 $ à 29,999 $", "30,000 $ à 39,999 $")] <- 0
+Clean$ses_houseincome[Raw$ses_income_2 %in% c("40,000 $ à 59,999 $", "60,000 $ à 79,999 $", "80,000 $ à 99,999 $")] <- 0.5
+Clean$ses_houseincome[Raw$ses_income_2 %in% c("100,000 $ et plus")] <- 1
