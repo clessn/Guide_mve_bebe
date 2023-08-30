@@ -158,14 +158,12 @@ Clean$guide_connaitre[Raw$Guide_1 == "Non"] <- 0
 Clean$guide_connaitre[Raw$Guide_1 == "Oui"] <- 1
 table(Clean$guide_connaitre)
 
-table(Raw$guide_format) #### à changer le codage ####
+table(Raw$guide_format)
 
-Clean$guide_formatpapierweb <- 0
-Clean$guide_formatpapierweb[Raw$guide_format == "En papier et en web"] <- 1
-Clean$guide_formatpapier <- 0
-Clean$guide_formatpapier[Raw$guide_format == "Seulement le format papier"] <- 1
-Clean$guide_formatweb <- 0
-Clean$guide_formatweb[Raw$guide_format == "Seulement en web"] <- 1
+Clean$guide_format <- NA
+Clean$guide_format[Raw$guide_format == "Seulement le format papier"] <- 0
+Clean$guide_format[Raw$guide_format == "En papier et en web"] <- 0.5
+Clean$guide_format[Raw$guide_format == "Seulement en web"] <- 1
 
 table(Raw$guide_use_1)
 
