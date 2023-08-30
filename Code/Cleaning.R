@@ -39,6 +39,7 @@ Clean$ses_week <- NA
 Clean$ses_week <- as.numeric(Raw$ses_pregnant_weeks_1)
 table(Clean$ses_week)
 hist(Clean$ses_week)
+table(Clean$ses_week)
 
 table(Raw$filter_2)
 Clean$filt_1stkid <- NA
@@ -46,8 +47,7 @@ Clean$filt_1stkid[Raw$filter_2 == "Non"] <- 0
 Clean$filt_1stkid[Raw$filter_2 == "Oui"] <- 1
 table(Clean$filt_1stkid)
 
-table(Raw$filter_3)
-
+table(Raw$filter_3) #### revoir car chiffre == fucked up ####
 Clean$filt_parent <- NA
 Clean$filt_parent[Raw$filter_3 == "Non"] <- 0
 Clean$filt_parent[Raw$filter_3 == "Oui"] <- 1
@@ -95,6 +95,7 @@ Clean$info_4_consultefacile <- 0
 Clean$info_4_consultefacile[Raw$info_4 == "Facile à consulter"] <- 1
 Clean$info_4_transportfacile <- 0
 Clean$info_4_transportfacile[Raw$info_4 == "Facile à transporter"] <- 1
+table(Clean$info_4_audiovisuel)
 
 table(Raw$info_4_6_TEXT)
 
@@ -157,7 +158,7 @@ Clean$guide_connaitre[Raw$Guide_1 == "Non"] <- 0
 Clean$guide_connaitre[Raw$Guide_1 == "Oui"] <- 1
 table(Clean$guide_connaitre)
 
-table(Raw$guide_format)
+table(Raw$guide_format) #### à changer le codage ####
 
 Clean$guide_formatpapierweb <- 0
 Clean$guide_formatpapierweb[Raw$guide_format == "En papier et en web"] <- 1
@@ -171,6 +172,7 @@ table(Raw$guide_use_1)
 Clean$guide_use_1 <- NA
 Clean$guide_use_1[Raw$guide_use_1 == "Non"] <- 0
 Clean$guide_use_1[Raw$guide_use_1 == "Oui"] <- 1
+table(Clean$guide_use_1)
 
 table(Raw$Guide_use_2)
 
@@ -239,17 +241,13 @@ Clean$guide_reception_proche[Raw$guide_reception_1 =="Un proche me l’a donné 
 
 table(Raw$guide_use_format)
 
-Clean$guide_use_formatpapierweb <- 0
-Clean$guide_use_formatpapierweb[Raw$guide_use_format == "Les deux formats -papier et web- de façon égale"] <- 1
-Clean$guide_use_formatsolopaper <- 0
-Clean$guide_use_formatsolopaper[Raw$guide_use_format == "Uniquement le format papier"] <- 1
-Clean$guide_use_formatmostlypaper <- 0
-Clean$guide_use_formatmostlypaper[Raw$guide_use_format == "Principalement le format papier"] <- 1
-Clean$guide_use_formatsoloweb <- 0
-Clean$guide_use_formatsoloweb[Raw$guide_use_format == "Uniquement le format web"] <- 1
-Clean$guide_use_formatmostlyweb <- 0
-Clean$guide_use_formatmostlyweb[Raw$guide_use_format == "Principalement le format web"] <- 1
-
+Clean$guide_use_format <- NA
+Clean$guide_use_format[Raw$guide_use_format == "Uniquement le format papier"] <- 0
+Clean$guide_use_format[Raw$guide_use_format == "Principalement le format papier"] <- 0.25
+Clean$guide_use_format[Raw$guide_use_format == "Les deux formats -papier et web- de façon égale"] <- 0.5
+Clean$guide_use_format[Raw$guide_use_format == "Principalement le format web"] <- 0.75
+Clean$guide_use_format[Raw$guide_use_format == "Uniquement le format web"] <- 1
+  
 table(Raw$guide_use_format_why)
 
 # !!!!! À FAIRE !!!!!
@@ -265,6 +263,7 @@ Clean$guide_paperfrequency[Raw$guide_paper == "Rarement"] <- 0.25
 Clean$guide_paperfrequency[Raw$guide_paper == "Quelques fois"] <- 0.5
 Clean$guide_paperfrequency[Raw$guide_paper == "Souvent"] <- 0.75
 Clean$guide_paperfrequency[Raw$guide_paper == "Très souvent"] <- 1
+table(Clean$guide_paperfrequency)
 
 table(Raw$guide_paper_prop)
 
@@ -333,6 +332,7 @@ Clean$guide_web_freq[Raw$guide_web == "Rarement"] <- 0.25
 Clean$guide_web_freq[Raw$guide_web == "Quelques fois"] <- 0.5
 Clean$guide_web_freq[Raw$guide_web == "Souvent"] <- 0.75
 Clean$guide_web_freq[Raw$guide_web == "Très souvent"] <- 1
+table(Clean$guide_web_freq)
 
 table(Raw$guide_web_prop)
 
@@ -394,25 +394,19 @@ table(Raw$relatives_guide_5_TEXT)
 
 table(Raw$relatives_format)
 
-Clean$relatives_formatpapierweb <- 0
-Clean$relatives_formatpapierweb[Raw$relatives_format == "Les deux formats -papier et web- de façon égale"] <- 1
-Clean$relatives_formatsolopaper <- 0
-Clean$relatives_formatsolopaper[Raw$relatives_format == "Uniquement le format papier"] <- 1
-Clean$relatives_formatmostlypaper <- 0
-Clean$relatives_formatmostlypaper[Raw$relatives_format == "Principalement le format papier"] <- 1
-Clean$relatives_formatsoloweb <- 0
-Clean$relatives_formatsoloweb[Raw$relatives_format == "Uniquement le format web"] <- 1
-Clean$relatives_formatmostlyweb <- 0
-Clean$relatives_formatmostlyweb[Raw$relatives_format == "Principalement le format web"] <- 1
+Clean$relatives_format <- NA
+Clean$relatives_format[Raw$relatives_format == "Uniquement le format papier"] <- 0
+Clean$relatives_format[Raw$relatives_format == "Principalement le format papier"] <- 0.25
+Clean$relatives_format[Raw$relatives_format == "Les deux formats -papier et web- de façon égale"] <- 0.5
+Clean$relatives_format[Raw$relatives_format == "Principalement le format web"] <- 0.75
+Clean$relatives_format[Raw$relatives_format == "Uniquement le format web"] <- 1
 
 table(Raw$relatives_web_format)
 
-Clean$relatives_web_formathtml <- 0
-Clean$relatives_web_formathtml[Raw$relatives_web_format == "HTML"] <- 1
-Clean$relatives_web_formatpdf <- 0
-Clean$relatives_web_formatpdf[Raw$relatives_web_format == "PDF"] <- 1
-Clean$relatives_web_formatboth <- 0
-Clean$relatives_web_formatboth[Raw$relatives_web_format == "Les deux formats (PDF et HTML) de façon égale"] <- 1
+Clean$relatives_web_formatpdfhtml <- NA
+Clean$relatives_web_formatpdfhtml[Raw$relatives_format == "PDF"] <- 0
+Clean$relatives_web_formatpdfhtml[Raw$relatives_format == "HTML"] <- 0.25
+Clean$relatives_web_formatpdfhtml[Raw$relatives_format == "Les deux formats (PDF et HTML) de façon égale"] <- 0.5
 
 table(Raw$guide_format_ess)
 
