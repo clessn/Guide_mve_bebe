@@ -726,3 +726,6 @@ Clean$ses_houseincome <- NA
 Clean$ses_houseincome[Raw$ses_income_2 %in% c("Moins de 10,000 $", "10,000 $ à 14,999 $", "15,000 $ à 29,999 $", "30,000 $ à 39,999 $")] <- 0
 Clean$ses_houseincome[Raw$ses_income_2 %in% c("40,000 $ à 59,999 $", "60,000 $ à 79,999 $", "80,000 $ à 99,999 $")] <- 0.5
 Clean$ses_houseincome[Raw$ses_income_2 %in% c("100,000 $ et plus")] <- 1
+
+
+saveRDS(Clean, "_SharedFolder_Guide_mve/data/clean.rds")
