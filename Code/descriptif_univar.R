@@ -9,7 +9,8 @@ library(ggthemes)
 Data <- readRDS("_SharedFolder_Guide_mve/data/clean.rds")
 
 table(Data$info)
-RawData <- read.csv("_SharedFolder_Guide_mve/data/INSPQ-guide-mve_RAW.csv")
+RawData <- read.csv("_SharedFolder_Guide_mve/data/INSPQ-guide-mve_RAW.csv",
+                    encoding = "UTF-8")
 
 
 # SES -------------------------------------------------------------------
