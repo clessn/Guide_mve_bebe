@@ -39,6 +39,7 @@ Clean$ses_week <- NA
 Clean$ses_week <- as.numeric(Raw$ses_pregnant_weeks_1)
 table(Clean$ses_week)
 hist(Clean$ses_week)
+table(Clean$ses_week)
 
 table(Raw$filter_2)
 Clean$filt_1stkid <- NA
@@ -46,8 +47,7 @@ Clean$filt_1stkid[Raw$filter_2 == "Non"] <- 0
 Clean$filt_1stkid[Raw$filter_2 == "Oui"] <- 1
 table(Clean$filt_1stkid)
 
-table(Raw$filter_3)
-
+table(Raw$filter_3) #### revoir car chiffre == fucked up ####
 Clean$filt_parent <- NA
 Clean$filt_parent[Raw$filter_3 == "Non"] <- 0
 Clean$filt_parent[Raw$filter_3 == "Oui"] <- 1
@@ -95,6 +95,7 @@ Clean$info_4_consultefacile <- 0
 Clean$info_4_consultefacile[Raw$info_4 == "Facile à consulter"] <- 1
 Clean$info_4_transportfacile <- 0
 Clean$info_4_transportfacile[Raw$info_4 == "Facile à transporter"] <- 1
+table(Clean$info_4_audiovisuel)
 
 table(Raw$info_4_6_TEXT)
 
@@ -157,7 +158,7 @@ Clean$guide_connaitre[Raw$Guide_1 == "Non"] <- 0
 Clean$guide_connaitre[Raw$Guide_1 == "Oui"] <- 1
 table(Clean$guide_connaitre)
 
-table(Raw$guide_format)
+table(Raw$guide_format) #### à changer le codage ####
 
 Clean$guide_formatpapierweb <- 0
 Clean$guide_formatpapierweb[Raw$guide_format == "En papier et en web"] <- 1
@@ -171,6 +172,7 @@ table(Raw$guide_use_1)
 Clean$guide_use_1 <- NA
 Clean$guide_use_1[Raw$guide_use_1 == "Non"] <- 0
 Clean$guide_use_1[Raw$guide_use_1 == "Oui"] <- 1
+table(Clean$guide_use_1)
 
 table(Raw$Guide_use_2)
 
@@ -261,6 +263,7 @@ Clean$guide_paperfrequency[Raw$guide_paper == "Rarement"] <- 0.25
 Clean$guide_paperfrequency[Raw$guide_paper == "Quelques fois"] <- 0.5
 Clean$guide_paperfrequency[Raw$guide_paper == "Souvent"] <- 0.75
 Clean$guide_paperfrequency[Raw$guide_paper == "Très souvent"] <- 1
+table(Clean$guide_paperfrequency)
 
 table(Raw$guide_paper_prop)
 
@@ -329,6 +332,7 @@ Clean$guide_web_freq[Raw$guide_web == "Rarement"] <- 0.25
 Clean$guide_web_freq[Raw$guide_web == "Quelques fois"] <- 0.5
 Clean$guide_web_freq[Raw$guide_web == "Souvent"] <- 0.75
 Clean$guide_web_freq[Raw$guide_web == "Très souvent"] <- 1
+table(Clean$guide_web_freq)
 
 table(Raw$guide_web_prop)
 
