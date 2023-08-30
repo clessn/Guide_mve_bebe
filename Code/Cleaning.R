@@ -7,7 +7,7 @@ library(tidyverse)
 rstudioapi::writeRStudioPreference("data_viewer_max_columns", 1000L)
 # Raw data --------------------------------------------------------------------
 
-Raw <- read.csv("_SharedFolder_Guide_mve/data/INSPQ-guide-mve_RAW.csv") %>% 
+Raw <- read.csv("_SharedFolder_Guide_mve/data/INSPQ-guide-mve_RAW.csv", encoding = "UTF-8") %>% 
   slice(-c(1,2)) %>%
   filter(code == "complete") %>%
   select(-StartDate, -EndDate, -Status, -IPAddress, -Progress,
@@ -28,20 +28,19 @@ names(Raw)
 # Block 1 - Filter ------------------------------------------------------------
 
 table(Raw$filter_1)
-
 Clean$filt_preg <- NA
 Clean$filt_preg[Raw$filter_1 == "Non"] <- 0
 Clean$filt_preg[Raw$filter_1 == "Oui"] <- 1
 table(Clean$filt_preg)
 
 table(Raw$ses_pregnant_weeks_1)
-
+class(Raw$ses_pregnant_weeks_1)
 Clean$ses_week <- NA
-Clean$ses_week <- Raw$ses_pregnant_weeks_1
-table(Clean$filt_week)
+Clean$ses_week <- as.numeric(Raw$ses_pregnant_weeks_1)
+table(Clean$ses_week)
+hist(Clean$ses_week)
 
 table(Raw$filter_2)
-
 Clean$filt_1stkid <- NA
 Clean$filt_1stkid[Raw$filter_2 == "Non"] <- 0
 Clean$filt_1stkid[Raw$filter_2 == "Oui"] <- 1
