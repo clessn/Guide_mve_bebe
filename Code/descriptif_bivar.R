@@ -211,20 +211,20 @@ ggsave("_SharedFolder_Guide_mve/graphs/5freq.png",
        width = 10, height = 6)
 
 
+# Who does not know the guide? --------------------------------------------
 
-## comparer guide_paperfrequency et guide_web_freq
+table(Data$guide_connaitre)
 
-## comparer guide_paper_prop et guide_web_prop
+# Wrangling ---------------------------------------------------------------
 
-## comparer satisfaction_papier et satisfaction_papier
-
-## guide_change pour les en ligne
-
-## guide_papier_prac VS guide_web_prac
-
-## guide_papier_dis VS guide_web_dis
-
-## guide_format_change
-
-
+## age
+Data$ses_age <- 1 * Data$ses_age1829 + 2 * Data$ses_age3039 + 
+  3*Data$ses_age4049
+Data$ses_age <- case_when(
+  Data$ses_age == 1 ~ "18_29",
+  Data$ses_age == 2 ~ "30_39",
+  Data$ses_age == 3 ~ "40_49"
+)
+Data$ses_age <- factor(Data$ses_age, ordered = TRUE)
+unique(Data$ses_age)
 
