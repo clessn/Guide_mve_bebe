@@ -70,7 +70,7 @@ ggsave("_SharedFolder_Guide_mve/graphs/2guide_consulte.png",
 
 # Guide use format --------------------------------------------------------
 
-table(Data$guide_use_format)
+table(Data$guide_use_format, useNA = "always")
 table(Data$guide_use_format, Data$guide_use_1,
       useNA = "always")
 table <- table(Data$guide_use_format, Data$guide_use_1, Data$guide_connaitre,
@@ -114,9 +114,101 @@ ggplot(Graph, aes(x = guide_use_format, y = n)) +
        title = "Format utilisé pour consulter le guide MVE") +
   theme(axis.text.x = element_text(angle = 15))
 
-### Un répondant n'a pas répondu
 ggsave("_SharedFolder_Guide_mve/graphs/3guide_format.png",
        width = 10, height = 8)
+
+
+## Stacked -----------------------------------------------------------------
+
+Graph2 <- Graph %>% 
+  mutate(papierweb = ifelse(guide_use_format %in% c("Uniquement papier",
+                                                    "Principalement papier"), "Papier", "Deux formats également"),
+         papierweb = ifelse(guide_use_format %in% c("Uniquement web",
+                                                    "Principalement web"), "Web", papierweb),
+         papierweb = factor(papierweb, levels = c("Papier", "Deux formats également", "Web")),
+         intensity = ifelse(guide_use_format %in% c("Uniquement papier",
+                                                    "Uniquement web"), "Uniquement", NA),
+         intensity = ifelse(guide_use_format %in% c("Principalement papier",
+                                                    "Principalement web"), "Principalement", intensity)) %>% 
+  group_by(papierweb) %>% 
+  mutate(nformat = sum(n))
+
+ggplot(Graph2, aes(x = papierweb, y = n)) +
+  geom_bar(stat = "identity",
+           aes(fill = papierweb,
+               alpha = intensity),
+           show.legend = T,
+           color = NA) +
+  scale_fill_manual(
+    values = c(
+      "Papier" = "#FFA07A",
+      "Deux formats également" = "#d7d8d5",
+      "Web" = "#6699CC"
+    )
+  ) +
+  scale_alpha_manual(values = c("Uniquement" = 1,
+                                "Principalement" = 0.4),
+                     name = "") +
+  guides(fill = FALSE) +
+  clessnverse::theme_clean_light(base_size = 15) +
+  geom_text(aes(y = nformat + 10, label = paste0("n = ", nformat))) +
+  ylab("Nombre de répondants") +
+  xlab("") +
+  labs(caption = "715 des 716 répondants qui ont consulté le guide MVE sont représentés sur ce graphique.\nUn répondant n'a pas répondu à cette question.",
+       title = "Format utilisé pour consulter le guide MVE") +
+  theme(axis.text.x = element_text())
+
+ggsave("_SharedFolder_Guide_mve/graphs/3guide_format2.png",
+       width = 10, height = 8)
+
+
+# Frequency -------------------------------------------------------------------------
+
+table(Data$guide_paperfrequency, Data$guide_use_format,
+      useNA = "always")
+table(Data$guide_web_freq, Data$guide_use_format,
+      useNA = "always")
+
+Data %>% 
+  pivot_longer(cols = c(guide_paperfrequency, guide_web_freq)) %>%
+  mutate(value = factor(value, labels = c("0" = "Jamais",
+                                          "0.25" = "Rarement",
+                                          "0.5" = "Quelques fois",
+                                          "0.75" = "Souvent",
+                                          "1" = "Très souvent"))) %>% 
+  group_by(name, value, .drop = FALSE) %>%
+  summarise(n = n()) %>%
+  drop_na() %>% 
+  group_by(name) %>% 
+  mutate(n_format = sum(n),
+         prop = n/n_format) %>% 
+  ggplot(aes(x = value, y = prop*100)) +
+  geom_bar(stat = "identity",
+           aes(fill = name,
+               group = name),
+           position = position_dodge2()) +
+  geom_text(aes(y = prop*100 + 1.5,
+                  label = paste0("n = ", n),
+                group = name),
+            position = position_dodge(width = 0.9)) +
+  clessnverse::theme_clean_light() +
+  scale_fill_manual(values = 
+                      c(
+                        "guide_paperfrequency" = "#FFA07A",
+                        "guide_web_freq" = "#6699CC"
+                      ),
+                    labels = 
+                      c(
+                        "guide_paperfrequency" = "Papier",
+                        "guide_web_freq" = "Web"
+                      )) +
+  ylab("Proportion des répondants par format consulté (%)") +
+  xlab("") +
+  labs(caption = "712 des 715 répondants qui ont indiqué leur format d'utilisation sont sur ce graphique.\nTrois répondants n'ont pas répondu à cette question.",
+       title = "Fréquence de consultation selon le format utilisé")
+
+ggsave("_SharedFolder_Guide_mve/graphs/5freq.png",
+       width = 10, height = 6)
 
 
 
