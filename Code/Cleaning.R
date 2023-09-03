@@ -338,12 +338,14 @@ table(Raw$guide_web_prop)
 Clean$guide_web_prop <- NA
 Clean$guide_web_prop[Raw$guide_web_prop == "Je ne sais pas/je préfère ne pas répondre"] <- NA
 Clean$guide_web_prop[Raw$guide_web_prop == "Rien (0%)"] <- 0
-Clean$guide_web_prop[Raw$guide_web_prop == "Quelques pages du guide (1-25%)"] <- 0.16
+Clean$guide_web_prop[Raw$guide_web_prop == "Quelques pages (1-25%)"] <- 0.16
 Clean$guide_web_prop[Raw$guide_web_prop == "Moins de la moitié (25-50%)"] <- 0.33
-Clean$guide_web_prop[Raw$guide_web_prop == "La moitié du guide (50%)"] <- 0.5
+Clean$guide_web_prop[Raw$guide_web_prop == "La moitié (50%)"] <- 0.5
 Clean$guide_web_prop[Raw$guide_web_prop == "Plus de la moitié (50-75%)"] <- 0.66
-Clean$guide_web_prop[Raw$guide_web_prop == "Presque tout le guide (75-99%)"] <- 0.83
-Clean$guide_web_prop[Raw$guide_web_prop == "Le guide au complet (100%)"] <- 1
+Clean$guide_web_prop[Raw$guide_web_prop == "Presque tout (75-99%)"] <- 0.83
+Clean$guide_web_prop[Raw$guide_web_prop == "Au complet (100%)"] <- 1
+table(Clean$guide_web_prop)
+
 
 table(Raw$guide_web_consult_1)
 
@@ -722,3 +724,4 @@ Clean$ses_houseincome[Raw$ses_income_2 %in% c("100,000 $ et plus")] <- 1
 
 
 saveRDS(Clean, "_SharedFolder_Guide_mve/data/clean.rds")
+write_csv(Clean, "_SharedFolder_Guide_mve/data/clean.csv")
