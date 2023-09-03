@@ -99,11 +99,11 @@ ggplot(Graph, aes(x = guide_use_format, y = n)) +
            color = NA) +
   scale_fill_manual(
     values = c(
-      "Uniquement papier" = "#FFE4B5",
-      "Principalement papier" = "#D2B48C",
-      "Les deux également" = "#808080",
-      "Principalement web" = "#6699CC",
-      "Uniquement web" = "#333399"
+      "Uniquement papier" = "#FFA07A",
+      "Principalement papier" = "#FFDAB9",
+      "Deux formats également" = "#d7d8d5",
+      "Principalement web" = "#AED6F1",
+      "Uniquement web" = "#6699CC"
     )
   ) +
   clessnverse::theme_clean_light(base_size = 15) +
@@ -118,9 +118,9 @@ ggplot(Graph, aes(x = guide_use_format, y = n)) +
 ggsave("_SharedFolder_Guide_mve/graphs/3guide_format.png",
        width = 10, height = 8)
 
-
-
 ## comparer guide_use_format_why selon papier ou web
+
+
 
 ## comparer guide_paperfrequency et guide_web_freq
 
