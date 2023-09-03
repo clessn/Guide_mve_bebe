@@ -118,8 +118,6 @@ ggplot(Graph, aes(x = guide_use_format, y = n)) +
 ggsave("_SharedFolder_Guide_mve/graphs/3guide_format.png",
        width = 10, height = 8)
 
-## comparer guide_use_format_why selon papier ou web
-
 
 
 ## comparer guide_paperfrequency et guide_web_freq

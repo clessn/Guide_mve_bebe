@@ -250,6 +250,7 @@ table(Raw$guide_use_format_why)
 
 # !!!!! À FAIRE !!!!!
 table(Raw$guide_use_format_why_1_TEXT)
+Clean$guide_use_format_why <- Raw$guide_use_format_why_1_TEXT
 # !!!!! À FAIRE !!!!!
 
 table(Raw$guide_paper)
