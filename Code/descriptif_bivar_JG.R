@@ -92,6 +92,39 @@ ggplot(data_long, aes(x = Category, y = Proportion_Percent, fill = Format)) +
 
 ggsave("_SharedFolder_Guide_mve/graphs/6guide_prop.png", width = 10, height = 8)
 
+## density
+
+data_density_read <- Data %>%
+  select(guide_paper_prop, guide_web_prop) %>%
+  gather(Format, Proportion_Read, everything()) %>%
+  filter(!is.na(Proportion_Read))
+
+# Création du graphique à crêtes
+ggplot(data_density_read, aes(x = Proportion_Read, y = factor(Format, levels = c("guide_web_prop", "guide_paper_prop"), labels = c("Web", "Papier")), fill = Format, color = Format)) +
+  ggridges::geom_density_ridges(
+    scale = 0.5,
+    rel_min_height = 0.01,
+    alpha = 0.6,
+    quantile_lines = TRUE
+  ) +
+  labs(
+    title = "Distribution de la proportion lue du guide selon le format",
+    x = "Proportion lue",
+    y = ""
+  ) +
+  scale_x_continuous(breaks = seq(0, 1, by = 0.1), labels = scales::percent(seq(0, 1, by = 0.1))) +
+  scale_fill_manual(values = c("#FFA07A", "#6699CC"), 
+                    labels = c("Format papier", "Format web")) +
+  scale_color_manual(values = c("#FFA07A", "#6699CC"), 
+                     labels = c("Format papier", "Format web")) +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  clessnverse::theme_clean_light()
+
+ggsave("_SharedFolder_Guide_mve/graphs/6guide_prop_density.png", 
+       width = 10, height = 8)
+
 ## Satisfaction du guide -------------------------------------------------------
 
 
@@ -127,6 +160,40 @@ ggplot(data_satisfaction, aes(x = Satisfaction, y = Proportion_Percent, fill = F
 
 ggsave("_SharedFolder_Guide_mve/graphs/7guide_satisfaction.png", width = 10, height = 8)
 
+## ridges
+
+# Utilisation directe des données et transformation en format long
+data_density <- Data %>%
+  select(guide_satisfaction_1paper, guide_satisfaction_web) %>%
+  gather(Format, Satisfaction, everything()) %>%
+  mutate(Format = ifelse(Format == "guide_satisfaction_1paper", "Paper", "Web"))
+
+# Création du graphique à crêtes avec affichage des lignes de quartile
+ggplot(data_density, aes(x = as.numeric(Satisfaction), y = factor(Format, levels = c("Web", "Paper"), labels = c("Web", "Papier")), fill = Format, color = Format)) +
+  ggridges::geom_density_ridges(
+    scale = 0.5,
+    rel_min_height = 0.01,
+    alpha = 0.6,
+    quantile_lines = TRUE,
+    trim = TRUE
+  ) +
+  labs(
+    title = "Distribution de la satisfaction des répondants selon le format",
+    x = "Niveau de satisfaction",
+    y = ""
+  ) +
+  scale_x_continuous(breaks = 0:10, labels = 0:10) +
+  scale_fill_manual(values = c("#FFA07A", "#6699CC"), 
+                    labels = c("Format papier", "Format web")) +
+  scale_color_manual(values = c("#FFA07A", "#6699CC"), 
+                     labels = c("Format papier", "Format web")) +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  clessnverse::theme_clean_light()
+
+ggsave("_SharedFolder_Guide_mve/graphs/7guide_satisfaction'density.png", 
+       width = 10, height = 8)
 ## pratique dans le guide ------------------------------------------------------
 
 # 1. Transformation des données en format long
@@ -222,3 +289,5 @@ ggplot(data_summary_disadvantages, aes(x = Disadvantage, y = Proportion_Percent,
 
 ggsave("_SharedFolder_Guide_mve/graphs/10guide_desavantages.png", 
        width = 10, height = 8)
+
+## 
