@@ -46,8 +46,6 @@ map_to_category <- function(value) {
     return("75-99%")
   } else if(0.50 <= value && value < 0.75) {
     return("50-75%")
-  } else if(value == 0.50) {
-    return("50% (moitié)")
   } else if(0.25 <= value && value < 0.50) {
     return("25-50%")
   } else if(0.01 <= value && value < 0.25) {
@@ -59,14 +57,14 @@ map_to_category <- function(value) {
   }
 }
 
-category_order <- c("0% (rien)", "1-25% (quelques pages)", "25-50%", "50% (moitié)", "50-75%", "75-99%", "100% (complet)")
-
+category_order <- c("0% (rien)", "1-25% (quelques pages)", "25-50%", "50-75%", "75-99%", "100% (complet)")
 
 # Utilisation directe des données et transformation en format long
 data_long <- Data %>%
   select(guide_paper_prop, guide_web_prop) %>%
   gather(Format, Proportion, everything()) %>%
   filter(!is.na(Proportion)) %>%
+  mutate(Proportion = ifelse(Proportion == 0.50, 0.66, Proportion)) %>%
   group_by(Format, Proportion) %>%
   summarize(Frequency = n()) %>%
   ungroup() %>%
@@ -79,6 +77,7 @@ data_long <- Data %>%
 # Création du graphique
 ggplot(data_long, aes(x = Category, y = Proportion_Percent, fill = Format)) +
   geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
   labs(
     title = "Proportion lue du guide selon le format",
     x = "Proportion lue",
@@ -88,7 +87,6 @@ ggplot(data_long, aes(x = Category, y = Proportion_Percent, fill = Format)) +
                     labels = c("Format papier", "Format web")) +
   clessnverse::theme_clean_light() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
 
 ggsave("_SharedFolder_Guide_mve/graphs/6guide_prop.png", width = 10, height = 8)
 
@@ -148,6 +146,7 @@ data_satisfaction <- drop_na(Data %>%
 # Création du graphique
 ggplot(data_satisfaction, aes(x = Satisfaction, y = Proportion_Percent, fill = Format)) +
   geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
   labs(
     title = "Satisfaction des répondants en fonction du format consulté",
     x = "Niveau de satisfaction",
@@ -229,7 +228,8 @@ data_summary_filtered <- data_practical_filtered %>%
 
 # 5. Création du graphique
 ggplot(data_summary_filtered, aes(x = Practicality, y = Proportion_Percent, fill = Format)) +
-  geom_bar(stat = "identity", position = "dodge") +
+  geom_bar(stat = "identity", position = "dodge") + 
+  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
   labs(
     title = "Avantages par format",
     x = "",
@@ -276,7 +276,8 @@ data_summary_disadvantages <- data_disadvantages_filtered %>%
 
 # 5. Création du graphique pour les désavantages
 ggplot(data_summary_disadvantages, aes(x = Disadvantage, y = Proportion_Percent, fill = Format)) +
-  geom_bar(stat = "identity", position = "dodge") +
+  geom_bar(stat = "identity", position = "dodge") + 
+  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
   labs(
     title = "Désavantages par format",
     x = "",
@@ -290,4 +291,401 @@ ggplot(data_summary_disadvantages, aes(x = Disadvantage, y = Proportion_Percent,
 ggsave("_SharedFolder_Guide_mve/graphs/10guide_desavantages.png", 
        width = 10, height = 8)
 
-## 
+## Connaissance vs SES ---------------------------------------------------------
+
+
+## Age
+table(Data$guide_connaitre)
+
+data_age_filtered <- Data %>%
+  filter(ses_age1829 == 1 | ses_age3039 == 1 | ses_age4049 == 1 | ses_age50 == 1)
+
+# Transforming the data to a long format
+data_age_long <- data_age_filtered %>%
+  select(guide_connaitre, ses_age1829, ses_age3039, ses_age4049, ses_age50) %>%
+  gather("Age_Group", "Value", -guide_connaitre) %>%
+  filter(Value == 1)
+
+data_age_summary <- data_age_long %>%
+  group_by(Age_Group, guide_connaitre) %>%
+  summarise(Frequency = n()) %>%
+  mutate(Total = sum(Frequency)) %>%
+  mutate(Proportion = Frequency / Total * 100) %>% 
+  filter(Frequency != 1)
+
+data_age_summary$Age_Group <- recode(data_age_summary$Age_Group, 
+                                     "ses_age1829" = "18 à 29 ans",
+                                     "ses_age3039" = "30 à 39 ans",
+                                     "ses_age4049" = "40 à 49 ans",
+                                     "ses_age50" = "50 ans et plus")
+# Création du graphique à barres
+ggplot(data_age_summary, aes(x = Age_Group, y = Proportion, fill = as.factor(guide_connaitre))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
+  labs(
+    title = "Connaissance du guide par tranche d'âge",
+    x = "",
+    y = "Proportion des répondants (%)",
+    fill = "Connaît le guide"
+  ) +
+  scale_fill_manual(values = c("#FF6B6B", "#95E08E"), 
+                    labels = c("Ne connaît pas le guide", "Connaît le guide")) +
+  clessnverse::theme_clean_light() +
+  theme(axis.text.x = element_text(hjust = 1))
+
+ggsave("_SharedFolder_Guide_mve/graphs/Xconnaitre_age.png", 
+       width = 10, height = 8)
+
+## Région
+
+data_region_filtered <- Data %>%
+  filter(ses_regionabitibi == 1 | ses_regionchaudiere == 1 | ses_regioniles == 1
+         | ses_regionmauricie == 1 | ses_regionoutaouais == 1 | ses_regionbasstlaur == 1
+         | ses_regioncotenord == 1 | ses_regionlanaudiere == 1 | ses_regionmonteregie == 1
+         | ses_regionsaguenay == 1 | ses_regionquebec == 1 | ses_regiondehors == 1
+         | ses_regionlaurentides == 1 | ses_regionmtl == 1 | ses_regioncentreduqc == 1
+         | ses_regionestrie == 1 | ses_regionlaval == 1 | ses_regionnordduqc == 1)
+
+# Transforming the data to a long format
+data_region_long <- data_region_filtered %>%
+  select(guide_connaitre, starts_with("ses_region")) %>%
+  gather("region_Group", "Value", -guide_connaitre) %>%
+  filter(Value == 1)
+
+data_region_summary <- data_region_long %>%
+  group_by(region_Group, guide_connaitre) %>%
+  summarise(Frequency = n()) %>%
+  mutate(Total = sum(Frequency)) %>%
+  mutate(Proportion = Frequency / Total * 100) %>% 
+  filter(Frequency != 1)
+
+data_region_summary <- rbind(data_region_summary, 
+                             data.frame(region_Group = "Côte-Nord", 
+                                        guide_connaitre = 0, 
+                                        Frequency = 0, 
+                                        Total = 0, 
+                                        Proportion = 0))
+
+
+data_region_summary <- rbind(data_region_summary, 
+                             data.frame(region_Group = "Gaspésie-Îles-de-la-Madeleine", 
+                                        guide_connaitre = 0, 
+                                        Frequency = 0, 
+                                        Total = 0, 
+                                        Proportion = 0))
+
+data_region_summary <- rbind(data_region_summary, 
+                             data.frame(region_Group = "Nord-du-Québec", 
+                                        guide_connaitre = 0, 
+                                        Frequency = 0, 
+                                        Total = 0, 
+                                        Proportion = 0))
+
+
+data_region_summary$region_Group <- recode(data_region_summary$region_Group, 
+                                     "ses_regionabitibi" = "Abitibi-Témiscamingue",
+                                     "ses_regionchaudiere" = "Chaudière-Appalaches",
+                                     "ses_regioniles" = "Gaspésie-Îles-de-la-Madeleine",
+                                     "ses_regionmauricie" = "Mauricie", 
+                                     "ses_regionoutaouais" = "Outaouais", 
+                                     "ses_regionbasstlaur" = "Bas-Saint-Laurent", 
+                                    "ses_regioncotenord"  = "Côte-Nord", 
+                                    "ses_regionlanaudiere" = "Lanaudière", 
+                                    "ses_regionmonteregie" = "Montérégie", 
+                                    "ses_regionsaguenay" = "Saguenay-Lac-Saint-Jean", 
+                                    "ses_regionquebec" = "Capitale-Nationale", 
+                                    "ses_regionlaurentides" = "Laurentides", 
+                                    "ses_regionmtl" = "Montréal", 
+                                    "ses_regioncentreduqc" = "Centre-du-Québec", 
+                                    "ses_regionestrie" = "Estrie", 
+                                    "ses_regionlaval" = "Laval", 
+                                    "ses_regionnordduqc" = "Nord-du-Québec")
+
+# 1. Calcul de la proportion moyenne de ceux qui connaissent le guide pour chaque région
+order_region <- data_region_summary %>%
+  filter(guide_connaitre == 1) %>% 
+  arrange(Proportion) %>%
+  pull(region_Group)
+
+# 2. Réorganisation des niveaux de la variable region_Group
+data_region_summary$region_Group <- factor(data_region_summary$region_Group, levels = order_region)
+
+# 3. Création du graphique à barres
+ggplot(data_region_summary, aes(x = region_Group, y = Proportion, fill = as.factor(guide_connaitre))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
+  labs(
+    title = "Connaissance du guide par région",
+    x = "",
+    y = "Proportion des répondants (%)",
+    fill = "Connaît le guide"
+  ) +
+  scale_fill_manual(values = c("#FF6B6B", "#95E08E"), 
+                    labels = c("Ne connaît pas le guide", "Connaît le guide")) +
+  clessnverse::theme_clean_light() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave("_SharedFolder_Guide_mve/graphs/Xconnaitre_region.png", 
+       width = 10, height = 8)
+
+## Éducation
+
+data_educ_filtered <- Data %>% 
+  filter(ses_educationprimaire == 1 | ses_educationsans5 == 1 | ses_educationavec5 == 1
+         | ses_educationcollegial == 1 | ses_educationbacc == 1
+         | ses_educationmaitrise == 1 | ses_educationphd == 1)
+
+data_educ_long <- data_educ_filtered %>%
+  select(guide_connaitre, starts_with("ses_education")) %>%
+  gather("educ_Group", "Value", -guide_connaitre) %>%
+  filter(Value == 1)
+
+data_educ_summary <- drop_na(data_educ_long %>%
+  group_by(educ_Group, guide_connaitre) %>%
+  summarise(Frequency = n()) %>%
+  mutate(Total = sum(Frequency)) %>%
+  mutate(Proportion = Frequency / Total * 100)) 
+
+education_order <- c(
+  "Primaire", 
+  "Secondaire non-complété", 
+  "Secondaire complété",
+  "Collégial",
+  "Baccalauréat",
+  "Maîtrise",
+  "Doctorat"
+)
+
+# Recoder les niveaux d'éducation pour data_educ_summary
+data_educ_summary$educ_Group <- recode(data_educ_summary$educ_Group, 
+                                       "ses_educationprimaire" = "Primaire", 
+                                       "ses_educationsans5" = "Secondaire non-complété", 
+                                       "ses_educationavec5" = "Secondaire complété", 
+                                       "ses_educationcollegial" = "Collégial", 
+                                       "ses_educationbacc" = "Baccalauréat", 
+                                       "ses_educationmaitrise" = "Maîtrise", 
+                                       "ses_educationphd" = "Doctorat")
+
+# Convertir la colonne 'educ_Group' de data_educ_summary en facteur avec l'ordre spécifié
+data_educ_summary$educ_Group <- factor(data_educ_summary$educ_Group, levels = education_order)
+
+
+
+ggplot(data_educ_summary, aes(x = educ_Group, y = Proportion, fill = as.factor(guide_connaitre))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
+  labs(
+    title = "Connaissance du guide par niveau d'éducation",
+    x = "",
+    y = "Proportion des répondants (%)",
+    fill = "Connaît le guide"
+  ) +
+  scale_fill_manual(values = c("#FF6B6B", "#95E08E"), 
+                    labels = c("Ne connaît pas le guide", "Connaît le guide")) +
+  clessnverse::theme_clean_light() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave("_SharedFolder_Guide_mve/graphs/Xconnaitre_educ.png", 
+       width = 10, height = 8)
+
+## Utilisation vs SES ----------------------------------------------------------
+## Age
+table(Data$guide_use_1)
+
+data_age_filtered <- Data %>%
+  filter(ses_age1829 == 1 | ses_age3039 == 1 | ses_age4049 == 1 | ses_age50 == 1)
+
+# Transforming the data to a long format
+data_age_long1 <- data_age_filtered %>%
+  select(guide_use_1, ses_age1829, ses_age3039, ses_age4049, ses_age50) %>%
+  gather("Age_Group", "Value", -guide_use_1) %>%
+  filter(Value == 1)
+
+data_age_summary1 <- drop_na(data_age_long1 %>%
+  group_by(Age_Group, guide_use_1) %>%
+  summarise(Frequency = n()) %>%
+  mutate(Total = sum(Frequency)) %>%
+  mutate(Proportion = Frequency / Total * 100))
+
+data_age_summary1$Age_Group <- recode(data_age_summary1$Age_Group, 
+                                     "ses_age1829" = "18 à 29 ans",
+                                     "ses_age3039" = "30 à 39 ans",
+                                     "ses_age4049" = "40 à 49 ans",
+                                     "ses_age50" = "50 ans et plus")
+# Création du graphique à barres
+ggplot(data_age_summary1, aes(x = Age_Group, y = Proportion, fill = as.factor(guide_use_1))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
+  labs(
+    title = "Utilisation du guide par tranche d'âge",
+    x = "",
+    y = "Proportion des répondants (%)",
+    fill = "Utilise le guide"
+  ) +
+  scale_fill_manual(values = c("#FF6B6B", "#95E08E"), 
+                    labels = c("N'utilise pas le guide", "Utilise le guide")) +
+  clessnverse::theme_clean_light() +
+  theme(axis.text.x = element_text(hjust = 1))
+
+ggsave("_SharedFolder_Guide_mve/graphs/Xutilise_age.png", 
+       width = 10, height = 8)
+
+## region
+
+## Région
+
+data_region_filtered <- Data %>%
+  filter(ses_regionabitibi == 1 | ses_regionchaudiere == 1 | ses_regioniles == 1
+         | ses_regionmauricie == 1 | ses_regionoutaouais == 1 | ses_regionbasstlaur == 1
+         | ses_regioncotenord == 1 | ses_regionlanaudiere == 1 | ses_regionmonteregie == 1
+         | ses_regionsaguenay == 1 | ses_regionquebec == 1 | ses_regiondehors == 1
+         | ses_regionlaurentides == 1 | ses_regionmtl == 1 | ses_regioncentreduqc == 1
+         | ses_regionestrie == 1 | ses_regionlaval == 1 | ses_regionnordduqc == 1)
+
+# Transforming the data to a long format
+data_region_long1 <- data_region_filtered %>%
+  select(guide_use_1, starts_with("ses_region")) %>%
+  gather("region_Group", "Value", -guide_use_1) %>%
+  filter(Value == 1)
+
+data_region_summary1 <- drop_na(data_region_long1 %>%
+  group_by(region_Group, guide_use_1) %>%
+  summarise(Frequency = n()) %>%
+  mutate(Total = sum(Frequency)) %>%
+  mutate(Proportion = Frequency / Total * 100))
+
+data_region_summary1 <- rbind(data_region_summary1, 
+                             data.frame(region_Group = "Côte-Nord", 
+                                        guide_use_1 = 0, 
+                                        Frequency = 0, 
+                                        Total = 0, 
+                                        Proportion = 0))
+
+
+data_region_summary1 <- rbind(data_region_summary1, 
+                             data.frame(region_Group = "Gaspésie-Îles-de-la-Madeleine", 
+                                        guide_use_1 = 0, 
+                                        Frequency = 0, 
+                                        Total = 0, 
+                                        Proportion = 0))
+
+data_region_summary1 <- rbind(data_region_summary1, 
+                             data.frame(region_Group = "Nord-du-Québec", 
+                                        guide_use_1 = 0, 
+                                        Frequency = 0, 
+                                        Total = 0, 
+                                        Proportion = 0))
+
+
+data_region_summary1$region_Group <- recode(data_region_summary1$region_Group, 
+                                           "ses_regionabitibi" = "Abitibi-Témiscamingue",
+                                           "ses_regionchaudiere" = "Chaudière-Appalaches",
+                                           "ses_regioniles" = "Gaspésie-Îles-de-la-Madeleine",
+                                           "ses_regionmauricie" = "Mauricie", 
+                                           "ses_regionoutaouais" = "Outaouais", 
+                                           "ses_regionbasstlaur" = "Bas-Saint-Laurent", 
+                                           "ses_regioncotenord"  = "Côte-Nord", 
+                                           "ses_regionlanaudiere" = "Lanaudière", 
+                                           "ses_regionmonteregie" = "Montérégie", 
+                                           "ses_regionsaguenay" = "Saguenay-Lac-Saint-Jean", 
+                                           "ses_regionquebec" = "Capitale-Nationale", 
+                                           "ses_regionlaurentides" = "Laurentides", 
+                                           "ses_regionmtl" = "Montréal", 
+                                           "ses_regioncentreduqc" = "Centre-du-Québec", 
+                                           "ses_regionestrie" = "Estrie", 
+                                           "ses_regionlaval" = "Laval", 
+                                           "ses_regionnordduqc" = "Nord-du-Québec")
+
+# 1. Calcul de la proportion moyenne de ceux qui connaissent le guide pour chaque région
+order_region1 <- data_region_summary1 %>%
+  filter(guide_use_1 == 1) %>% 
+  arrange(Proportion) %>%
+  pull(region_Group)
+
+# 2. Réorganisation des niveaux de la variable region_Group
+data_region_summary1$region_Group <- factor(data_region_summary1$region_Group, levels = order_region1)
+
+# 3. Création du graphique à barres
+ggplot(data_region_summary1, aes(x = region_Group, y = Proportion, fill = as.factor(guide_use_1))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
+  labs(
+    title = "Utilisation du guide par région",
+    x = "",
+    y = "Proportion des répondants (%)",
+    fill = "Utilise le guide"
+  ) +
+  scale_fill_manual(values = c("#FF6B6B", "#95E08E"), 
+                    labels = c("N'utilise pas le guide", "Utilise le guide")) +
+  clessnverse::theme_clean_light() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave("_SharedFolder_Guide_mve/graphs/Xutilise_region.png", 
+       width = 10, height = 8)
+
+## education
+
+data_educ_filtered <- Data %>% 
+  filter(ses_educationprimaire == 1 | ses_educationsans5 == 1 | ses_educationavec5 == 1
+         | ses_educationcollegial == 1 | ses_educationbacc == 1
+         | ses_educationmaitrise == 1 | ses_educationphd == 1)
+
+data_educ_long1 <- data_educ_filtered %>%
+  select(guide_use_1, starts_with("ses_education")) %>%
+  gather("educ_Group", "Value", -guide_use_1) %>%
+  filter(Value == 1)
+
+data_educ_summary1 <- drop_na(data_educ_long1 %>%
+                               group_by(educ_Group, guide_use_1) %>%
+                               summarise(Frequency = n()) %>%
+                               mutate(Total = sum(Frequency)) %>%
+                               mutate(Proportion = Frequency / Total * 100)) 
+
+data_educ_summary1 <- rbind(data_educ_summary1, 
+                              data.frame(educ_Group = "Doctorat", 
+                                         guide_use_1 = 0, 
+                                         Frequency = 0, 
+                                         Total = 0, 
+                                         Proportion = 0))
+
+education_order <- c(
+  "Primaire", 
+  "Secondaire non-complété", 
+  "Secondaire complété",
+  "Collégial",
+  "Baccalauréat",
+  "Maîtrise",
+  "Doctorat"
+)
+
+# Recoder les niveaux d'éducation pour data_educ_summary
+data_educ_summary1$educ_Group <- recode(data_educ_summary1$educ_Group, 
+                                       "ses_educationprimaire" = "Primaire", 
+                                       "ses_educationsans5" = "Secondaire non-complété", 
+                                       "ses_educationavec5" = "Secondaire complété", 
+                                       "ses_educationcollegial" = "Collégial", 
+                                       "ses_educationbacc" = "Baccalauréat", 
+                                       "ses_educationmaitrise" = "Maîtrise", 
+                                       "ses_educationphd" = "Doctorat")
+
+# Convertir la colonne 'educ_Group' de data_educ_summary en facteur avec l'ordre spécifié
+data_educ_summary1$educ_Group <- factor(data_educ_summary1$educ_Group, levels = education_order)
+
+
+
+ggplot(data_educ_summary1, aes(x = educ_Group, y = Proportion, fill = as.factor(guide_use_1))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
+  labs(
+    title = "Utilisation du guide par niveau d'éducation",
+    x = "",
+    y = "Proportion des répondants (%)",
+    fill = "Utilise le guide"
+  ) +
+  scale_fill_manual(values = c("#FF6B6B", "#95E08E"), 
+                    labels = c("N'utilise pas le guide", "Utilise le guide")) +
+  clessnverse::theme_clean_light() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave("_SharedFolder_Guide_mve/graphs/Xutilise_educ.png", 
+       width = 10, height = 8)
