@@ -19,8 +19,8 @@ Raw <- read.csv("_SharedFolder_Guide_mve/data/INSPQ-guide-mve_RAW.csv", encoding
 # Clean data ------------------------------------------------------------------
 
 Clean <- data.frame(
- ID = c(1:nrow(Raw))
- ) 
+  ID = c(1:nrow(Raw))
+) 
 # Names -----------------------------------------------------------------------
 
 names(Raw)
@@ -221,21 +221,21 @@ Clean$guide_reception_autonome[Raw$guide_reception_1 =="On ne me l’a pas remis
 table(Raw$guide_reception_1_6_TEXT)
 
 Clean$guide_reception_amie <- 0
-Clean$guide_reception_amie[Raw$guide_reception_1 =="Amie m’a donné le guide papier"] <- 1
+Clean$guide_reception_amie[Raw$guide_reception_1_6_TEXT =="Amie m’a donné le guide papier"] <- 1
 Clean$guide_reception_soeur <- 0
-Clean$guide_reception_soeur[Raw$guide_reception_1 =="De ma soeur"] <- 1
+Clean$guide_reception_soeur[Raw$guide_reception_1_6_TEXT =="De ma soeur"] <- 1
 Clean$guide_reception_france <- 0
-Clean$guide_reception_france[Raw$guide_reception_1 =="Donné par quelqu'un (grossesse et accouchement en France)"] <- 1
+Clean$guide_reception_france[Raw$guide_reception_1_6_TEXT =="Donné par quelqu'un (grossesse et accouchement en France)"] <- 1
 Clean$guide_reception_autreversion <- 0
-Clean$guide_reception_autreversion[Raw$guide_reception_1 =="Il y a plusieurs années ont m’a remis le format livre et ensuite on m’a dirigé vers le web"] <- 1
-Clean$guide_reception_autreversion[Raw$guide_reception_1 =="On m'avait remis la version papier à la naissance de ma fille mais plusieurs choses avait changé lors de ma deuxième grossesse et j'ai trouvé par moi-même ma version web"] <- 1
-Clean$guide_reception_autreversion[Raw$guide_reception_1 =="On me l’a remis à ma première grossesse il y a 10 ans"] <- 1
+Clean$guide_reception_autreversion[Raw$guide_reception_1_6_TEXT =="Il y a plusieurs années ont m’a remis le format livre et ensuite on m’a dirigé vers le web"] <- 1
+Clean$guide_reception_autreversion[Raw$guide_reception_1_6_TEXT =="On m'avait remis la version papier à la naissance de ma fille mais plusieurs choses avait changé lors de ma deuxième grossesse et j'ai trouvé par moi-même ma version web"] <- 1
+Clean$guide_reception_autreversion[Raw$guide_reception_1_6_TEXT =="On me l’a remis à ma première grossesse il y a 10 ans"] <- 1
 Clean$guide_reception_médecin <- 0
-Clean$guide_reception_médecin[Raw$guide_reception_1 =="J'ai demandé à ma médecin de famille de me le donner "] <- 1
+Clean$guide_reception_médecin[Raw$guide_reception_1_6_TEXT =="J'ai demandé à ma médecin de famille de me le donner "] <- 1
 Clean$guide_reception_cpe <- 0
-Clean$guide_reception_cpe[Raw$guide_reception_1 =="Je suis éducatrice en cpe"] <- 1
+Clean$guide_reception_cpe[Raw$guide_reception_1_6_TEXT =="Je suis éducatrice en cpe"] <- 1
 Clean$guide_reception_proche <- 0
-Clean$guide_reception_proche[Raw$guide_reception_1 =="Un proche me l’a donné "] <- 1
+Clean$guide_reception_proche[Raw$guide_reception_1_6_TEXT =="Un proche me l’a donné "] <- 1
 
 table(Raw$guide_use_format)
 
@@ -245,12 +245,11 @@ Clean$guide_use_format[Raw$guide_use_format == "Principalement le format papier"
 Clean$guide_use_format[Raw$guide_use_format == "Les deux formats -papier et web- de façon égale"] <- 0.5
 Clean$guide_use_format[Raw$guide_use_format == "Principalement le format web"] <- 0.75
 Clean$guide_use_format[Raw$guide_use_format == "Uniquement le format web"] <- 1
-  
+
 table(Raw$guide_use_format_why)
 
 # !!!!! À FAIRE !!!!!
 table(Raw$guide_use_format_why_1_TEXT)
-Clean$guide_use_format_why <- Raw$guide_use_format_why_1_TEXT
 # !!!!! À FAIRE !!!!!
 
 table(Raw$guide_paper)
@@ -338,14 +337,12 @@ table(Raw$guide_web_prop)
 Clean$guide_web_prop <- NA
 Clean$guide_web_prop[Raw$guide_web_prop == "Je ne sais pas/je préfère ne pas répondre"] <- NA
 Clean$guide_web_prop[Raw$guide_web_prop == "Rien (0%)"] <- 0
-Clean$guide_web_prop[Raw$guide_web_prop == "Quelques pages (1-25%)"] <- 0.16
+Clean$guide_web_prop[Raw$guide_web_prop == "Quelques pages du guide (1-25%)"] <- 0.16
 Clean$guide_web_prop[Raw$guide_web_prop == "Moins de la moitié (25-50%)"] <- 0.33
-Clean$guide_web_prop[Raw$guide_web_prop == "La moitié (50%)"] <- 0.5
+Clean$guide_web_prop[Raw$guide_web_prop == "La moitié du guide (50%)"] <- 0.5
 Clean$guide_web_prop[Raw$guide_web_prop == "Plus de la moitié (50-75%)"] <- 0.66
-Clean$guide_web_prop[Raw$guide_web_prop == "Presque tout (75-99%)"] <- 0.83
-Clean$guide_web_prop[Raw$guide_web_prop == "Au complet (100%)"] <- 1
-table(Clean$guide_web_prop)
-
+Clean$guide_web_prop[Raw$guide_web_prop == "Presque tout le guide (75-99%)"] <- 0.83
+Clean$guide_web_prop[Raw$guide_web_prop == "Le guide au complet (100%)"] <- 1
 
 table(Raw$guide_web_consult_1)
 
@@ -585,16 +582,24 @@ Clean$ses_age4049 <- 0
 Clean$ses_age4049[Raw$ses_age == "40-49"] <-1
 Clean$ses_age50 <- 0
 Clean$ses_age50[Raw$ses_age == "50 ou plus"] <-1
+table(Clean$ses_age1829)
+table(Clean$ses_age3039)
+table(Clean$ses_age4049)
+table(Clean$ses_age50)   
 
 table(Raw$ses_sex_ori)
 
 #Clean$ses_couple <- 0
 #Clean$ses_couple[Raw$ses_sex_ori == "Autre"] <- 1
-Clean$ses_couple <- NA
-Clean$ses_couple[Raw$ses_sex_ori == "Couple"] <- 1
-Clean$ses_couple[Raw$ses_sex_ori %in% c("Autre", "Famille monoparentale")] <- 0
+#Clean$ses_couple <- NA
+#Clean$ses_couple[Raw$ses_sex_ori == "Couple"] <- 1
+#Clean$ses_couple[Raw$ses_sex_ori %in% c("Autre", "Famille monoparentale")] <- 0
 #Clean$ses_couple <- 0
 #Clean$ses_couple[Raw$ses_sex_ori == "Famille monoparentale"] <- 1
+Clean$ses_coupleautre <- 0
+Clean$ses_coupleautre[Raw$ses_sex_ori %in% c("Autre", "Famille monoparentale")] <- 1
+Clean$ses_couple <- 0
+Clean$ses_couple[Raw$ses_sex_ori == "Couple"] <- 1
 
 table(Raw$ses_immigrant)
 
@@ -607,6 +612,7 @@ table(Raw$ses_immigrant_year_1_TEXT)
 
 Clean$ses_immigrant_year <- NA
 Clean$ses_immigrant_year <- Raw$ses_immigrant_year
+table(Clean$ses_immigrant_year)
 
 table(Raw$ses_language)
 table(Raw$ses_language_3_TEXT)
@@ -620,7 +626,8 @@ Clean$ses_languageeng[Raw$ses_language == "Anglais"] <- 1
 Clean$ses_languagefr <- 0
 Clean$ses_languagefr[Raw$ses_language == "Français"] <- 1
 Clean$ses_languagearab <- 0
-Clean$ses_languagearab[Raw$ses_sex_ori == "Arabe"] <- 1
+Clean$ses_languagearab[Raw$ses_language_3_TEXT == "Arabe"] <- 1
+table(Clean$ses_languageboth)
 
 table(Raw$ses_kids_1)
 Clean$ses_kids <- 0
@@ -725,4 +732,3 @@ Clean$ses_houseincome[Raw$ses_income_2 %in% c("100,000 $ et plus")] <- 1
 
 
 saveRDS(Clean, "_SharedFolder_Guide_mve/data/clean.rds")
-write_csv(Clean, "_SharedFolder_Guide_mve/data/clean.csv")
