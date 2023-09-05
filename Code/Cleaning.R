@@ -588,12 +588,13 @@ Clean$ses_age50[Raw$ses_age == "50 ou plus"] <-1
 
 table(Raw$ses_sex_ori)
 
-Clean$ses_couple <- 0
-Clean$ses_couple[Raw$ses_sex_ori == "Autre"] <- 1
-Clean$ses_couple <- 0
+#Clean$ses_couple <- 0
+#Clean$ses_couple[Raw$ses_sex_ori == "Autre"] <- 1
+Clean$ses_couple <- NA
 Clean$ses_couple[Raw$ses_sex_ori == "Couple"] <- 1
-Clean$ses_couple <- 0
-Clean$ses_couple[Raw$ses_sex_ori == "Famille monoparentale"] <- 1
+Clean$ses_couple[Raw$ses_sex_ori %in% c("Autre", "Famille monoparentale")] <- 0
+#Clean$ses_couple <- 0
+#Clean$ses_couple[Raw$ses_sex_ori == "Famille monoparentale"] <- 1
 
 table(Raw$ses_immigrant)
 
@@ -611,13 +612,13 @@ table(Raw$ses_language)
 table(Raw$ses_language_3_TEXT)
 
 Clean$ses_languageboth <- 0
-Clean$ses_languageboth[Raw$ses_sex_ori == "Anglais et français egale"] <- 1
-Clean$ses_languageboth[Raw$ses_sex_ori == "Français et anglais"] <- 1
-Clean$ses_languageboth[Raw$ses_sex_ori == "Les deux"] <- 1
+Clean$ses_languageboth[Raw$ses_language_3_TEXT == "Anglais et français egale"] <- 1
+Clean$ses_languageboth[Raw$ses_language_3_TEXT == "Français et anglais"] <- 1
+Clean$ses_languageboth[Raw$ses_language_3_TEXT == "Les deux"] <- 1
 Clean$ses_languageeng <- 0
-Clean$ses_languageeng[Raw$ses_sex_ori == "Anglais"] <- 1
+Clean$ses_languageeng[Raw$ses_language == "Anglais"] <- 1
 Clean$ses_languagefr <- 0
-Clean$ses_languagefr[Raw$ses_sex_ori == "Français"] <- 1
+Clean$ses_languagefr[Raw$ses_language == "Français"] <- 1
 Clean$ses_languagearab <- 0
 Clean$ses_languagearab[Raw$ses_sex_ori == "Arabe"] <- 1
 
