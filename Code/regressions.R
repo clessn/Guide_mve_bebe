@@ -73,7 +73,7 @@ table(Data$guide_connaitre)
 model <- glm(guide_connaitre ~ ses_age + ses_couple +
                ses_kids2 +
                ses_canada*ses_age +
-               yparent_status + ses_languagefr +
+               yparent_status*ses_houseincome + ses_languagefr +
                ses_educ + ses_houseincome +
                info_1,
              family = binomial(),
@@ -123,7 +123,6 @@ df_can$ses_canada <- rep(as.numeric(choices), times = nrow(Data))
 df_can$prob <- predict(model, newdata = df_can, type = "response")
 
 ### graph
-
 graph <- df_can %>% 
   group_by(ses_canada, ses_age) %>% 
   summarise(
@@ -183,7 +182,81 @@ choices <- names(table(Data$ses_houseincome))
 df_inc <- Data[rep(1:nrow(Data),
                    each = length(choices)),]
 df_inc$ses_houseincome <- rep(as.numeric(choices), times = nrow(Data))
-df_inc$prob <- predict(model, newdata = df_inc, type = "response")
+
+choices <- names(table(df_inc$yparent_status))
+df_fin <- Data[rep(1:nrow(df_inc),
+                   each = length(choices)),]
+df_fin$yparent_status <- rep(choices, times = nrow(df_inc))
+
+
+df_fin$prob <- predict(model, newdata = df_fin, type = "response")
+
+### graph
+graph <- df_fin %>%
+  drop_na(ses_houseincome, yparent_status) %>%
+  group_by(ses_houseincome, yparent_status) %>%
+  summarise(
+    mean = mean(prob, na.rm = T) * 100,
+    low = list(confint(lm(prob ~ 1)))[[1]][1] * 100,
+    high = list(confint(lm(prob ~ 1)))[[1]][2] * 100,
+  ) %>%
+  ungroup() %>% 
+  mutate(
+    ses_houseincome = factor(
+      ses_houseincome,
+      ordered = T,
+      labels = c(
+        "0" = "Faible\n(39 999$ et moins)",
+        "0.5" = "Moyen\n(40 000$ à 99 999$)",
+        "1" = "Élevé\n(100 000$ et plus)"
+      )
+    ),
+    yparent_status = factor(
+      as.character(yparent_status),
+      labels = c(
+        "parent_not_preg" = "Parents non enceints",
+        "firstkid" = "Enceints du\npremier enfant",
+        "parent_preg" = "Enceints,\ndéjà parents"
+      )
+    )
+  )
+
+ggplot(graph, aes(x = mean, y = yparent_status)) +
+  geom_pointrange(aes(xmin = low,
+                      xmax = high,
+                      group = ses_houseincome,
+                      color = ses_houseincome),
+                  linewidth = 5,
+                  lineend = "round",
+                  position = position_dodge(width = 0.3)) +
+  geom_point(aes(color = ses_houseincome,
+                  group = ses_houseincome),
+              size = 12, alpha = 1,
+             position = position_dodge(width = 0.3)) +
+  geom_point(aes(color = ses_houseincome,
+                  x = low,
+                  group = ses_houseincome),
+              size = 8, alpha = 0.5,
+             position = position_dodge(width = 0.3)) +
+  geom_point(aes(color = ses_houseincome,
+                  x = high,
+                  group = ses_houseincome),
+              size = 8, alpha = 0.5,
+             position = position_dodge(width = 0.3)) +
+  scale_color_manual(values = c(
+    "#ADD8E6",
+    "#66CD00",
+    "#FFD700"
+  )) +
+  xlim(c(30, 100)) +
+  clessnverse::theme_clean_light(base_size = 15) +
+  xlab("Probabilité de connaître le guide MVE (%)") +
+  ylab("") +
+  labs(title = "Relation entre le statut des parents, le revenu\ndu ménage et la connaissance du guide MVE",
+       caption = "Probabilités prédites d'un modèle de régression logistique.\nLes lignes horizontales indiquent l'intervalle de confiance à un niveau de confiance de 95%.")
+
+ggsave("_SharedFolder_Guide_mve/graphs/13_connaitreXstatus.png",
+       width = 10, height = 8)  
 
 
 
