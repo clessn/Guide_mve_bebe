@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Caractéristiques du répondant
 
-![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_age.png){width="70%"} \newline Nous ne retrouvons que très peu de répondants agés de 40 à 49 ans, aucun répondants de 50 ans ou plus, la majorité se trouvant dans les deux autres tranches d'âge. Cependant, les 30 à 39 ans ont plus de répondants que les 18-29 ans.
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_age.png){width="70%"} \newline Nous ne retrouvons que très peu de répondants agés de 40 à 49 ans et aucun répondant de 50 ans ou plus, la majorité se trouvant dans les deux autres tranches d'âge. Les 30 à 39 ans sont plus nombreux que les 18 à 29 ans.
 
 ![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_kidsLink.png){width="70%"} \newline Nous remarquons que la majorité des répondants sont des mères, avec toutefois un nombre intéressant de pères considérant que l'échantillonnage souhaité peut avoir mené à cette distortion.
 
