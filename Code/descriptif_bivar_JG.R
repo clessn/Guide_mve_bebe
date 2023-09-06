@@ -229,15 +229,18 @@ data_summary_filtered <- data_practical_filtered %>%
 # 5. Création du graphique
 ggplot(data_summary_filtered, aes(x = Practicality, y = Proportion_Percent, fill = Format)) +
   geom_bar(stat = "identity", position = "dodge") + 
-  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
+  geom_text(aes(label = paste0("n = ", Frequency)),
+            vjust = -0.5, position = position_dodge(0.9),
+            size = 6) +
   labs(
     title = "Avantages par format",
     x = "",
     y = "Proportion des répondants par format"
   ) +
+  scale_y_continuous(limits = c(0, 70)) +
   scale_fill_manual(values = c("#FFA07A", "#6699CC"), 
                     labels = c("Format papier", "Format web")) +
-  clessnverse::theme_clean_light() +
+  clessnverse::theme_clean_light(base_size = 16) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ggsave("_SharedFolder_Guide_mve/graphs/9guide_pratique.png", width = 10, height = 8)
@@ -277,15 +280,17 @@ data_summary_disadvantages <- data_disadvantages_filtered %>%
 # 5. Création du graphique pour les désavantages
 ggplot(data_summary_disadvantages, aes(x = Disadvantage, y = Proportion_Percent, fill = Format)) +
   geom_bar(stat = "identity", position = "dodge") + 
-  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
+  geom_text(aes(label = paste0("n = ", Frequency)), size = 6,
+            vjust = -0.5, position = position_dodge(0.9)) +
   labs(
     title = "Désavantages par format",
     x = "",
     y = "Proportion des répondants par format"
   ) +
+  scale_y_continuous(limits = c(0,90)) +
   scale_fill_manual(values = c("#FFA07A", "#6699CC"), 
                     labels = c("Format papier", "Format web")) +
-  clessnverse::theme_clean_light() +
+  clessnverse::theme_clean_light(base_size = 16) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ggsave("_SharedFolder_Guide_mve/graphs/10guide_desavantages.png", 

@@ -13,9 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Caractéristiques du répondant
 
-![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_age.png){width="70%"} \newline Nous ne retrouvons que très peu de répondants agés de 40 à 49 ans, aucun répondants de 50 ans ou plus, la majorité se trouvant dans les deux autres tranches d'âge. Cependant, les 30 à 39 ans ont plus de répondants que les 18-29 ans.
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_age.png){width="70%"} \newline Nous ne retrouvons que très peu de répondants agés de 40 à 49 ans et aucun répondant de 50 ans ou plus, la majorité se trouvant dans les deux autres tranches d'âge. Les 30 à 39 ans sont plus nombreux que les 18 à 29 ans.
 
-![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_kidsLink.png){width="70%"} \newline Nous remarquons que la majorité des répondants sont des mères, avec toutefois un nombre intéressant de pères considérant que l'échantillonnage souhaité peut avoir mené à cette distortion.
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_kidsLink.png){width="70%"} \newline Nous remarquons que la majorité des répondants sont des mères.
 
 \newpage
 
@@ -37,16 +37,16 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{=tex}
 \begin{minipage}{1.0\textwidth}
   \textbf{} 
-Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’une majorité des répondants au sondage connaissent le guide MVE, et de ce nombre, la majorité ont consulté le guide. Cela signifie que l’échantillon cible de ce sondage est bel et bien renseigné sur l’existence du guide en plus d'y trouver une utilité à sa consultation, tel que souhaité.
+Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’une majorité des répondants du sondage connaissent le guide MVE et, de ce nombre, la majorité ont consulté le guide. Cela signifie que l’échantillon cible de ce sondage est bel et bien renseigné sur l’existence du guide en plus d'y trouver une utilité à sa consultation, tel que souhaité.
 
 \end{minipage}
 ```
 \vspace{30pt}
 
-![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/12_connaitreXweeks.png){width="90%"} \vspace{20pt} \newline Cependant, lorsque le niveau de connaissance est analysé en fonction de l'avancement de la grossesse, il est possible de constater une tendance à la hausse, bien que très légère.
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/12_connaitreXweeks.png){width="90%"} \vspace{20pt} \newline Lorsque le niveau de connaissance est analysé en fonction de l'avancement de la grossesse, il est possible de constater une tendance à la hausse, bien que très légère.
 
 
-![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/12_connaitreXweeksX1stkid.png){width="90%"} \vspace{20pt} \newline Cette tendance à la hausse s'accentue davantage lorsque le répondant est enceinte et qu'il est à son premier enfant. En effet, il est probable qu'un répondant à sa première grossesse n'ait aucune connaissance du guide, mais que les chances qu'il le connaisse augmentent au fil des semaines de grossesses.
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/12_connaitreXweeksX1stkid.png){width="90%"} \vspace{20pt} \newline Cette tendance à la hausse s'accentue davantage lorsque le couple du répondant est enceinte de son premier enfant. En effet, il est probable qu'un répondant à sa première grossesse n'ait aucune connaissance du guide, mais que les chances qu'il le connaisse augmentent au fil des semaines de grossesses.
 
 ![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_kids.png){width="75%"}
 
@@ -58,7 +58,7 @@ Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’un
   \end{minipage}%
   \begin{minipage}{0.3\textwidth}
     \textbf{}
-    Plus spécifiquement, une augmentation du  nombres d'enfants correspond à une hausse du taux de connaissance du guide. Cependant, le niveau de connaissance du guide n'augmente que légèrement à partir du deuxième enfant.
+    Plus spécifiquement, une augmentation du nombre d'enfants correspond à une hausse du taux de connaissance du guide. Le niveau de connaissance du guide n'augmente que légèrement à partir du deuxième enfant.
   \end{minipage}
 \end{figure}
 ```
@@ -71,7 +71,7 @@ Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’un
     \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/13_connaitreXses_canada.png}
  \end{minipage}%
   \begin{minipage}{0.4\textwidth}
-    \textbf{} Nous remarquons également que les répondants nées hors Canada ne connaissent généralement pas le guide, notamment lorsqu'ils sont plus agés. Plus l'âge d'un répondant immigrant est faible, plus les probabilités de connaître le guide sont élevés. Le niveau de connaissance pour un répondant né au Canada est généralement plus élevé, à l'exception d'une petite baisse pour les plus jeunes.
+    \textbf{} Nous remarquons également que les répondants nés hors Canada ne connaissent généralement pas le guide, notamment lorsqu'ils sont plus agés. Plus un répondant immigrant est jeune, plus les probabilités qu'il connaisse le guide sont élevées. Le niveau de connaissance pour un répondant né au Canada est généralement plus élevé à l'exception d'une petite baisse pour les plus jeunes.
   \end{minipage}
 \end{figure}
 ```
@@ -84,7 +84,7 @@ Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’un
     \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/13_connaitreXstatus.png}
   \end{minipage}%
   \begin{minipage}{0.4\textwidth}
-    \textbf{} Les répondants avec un faible revenu connaissent moins le guide, et vice versa. Cette différence est accentuée par le statut du parent. Les répondants enceintes pour la première fois sont ceux qui connaissent moins le guide, et c'est encore plus vrai pour ceux avec un faible revenu. La connaissance est plus élevé et les différences sont moins accentuées pour les parents enceintes mais déjà parent. Finalement, les répondants non-enceintes et déjà parents connaissent généralement le guide, avec des différences minimes en fonction du revenu.
+    \textbf{} Les répondants avec un faible revenu connaissent moins le guide et vice versa. Cette différence est accentuée par le statut du parent. Les répondants enceintes pour la première fois sont ceux qui connaissent moins le guide et c'est encore plus le cas pour ceux avec un faible revenu. La connaissance est plus élevée et les différences sont moins accentuées pour les parents enceintes mais déjà parents. Finalement, les répondants non-enceintes et déjà parents connaissent généralement le guide, avec des différences minimes en fonction du revenu.
   \end{minipage}
 \end{figure}
 ```
@@ -97,7 +97,7 @@ Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’un
     \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/Xconnaitre_age.png}
   \end{minipage}%
   \begin{minipage}{0.3\textwidth}
-    \textbf{} La proportion de non-connaissance des répondants dans le groupe des 40 à 49 ans est légèrement plus élevée que les deux groupes plus jeunes. Cependant, il ne s'agit que d'une différence de quelques points de pourcentage. Cette différence n'est pas significative, mais elle est tout de même considérable.
+    \textbf{} La proportion de connaissance du guide des répondants dans le groupe des 40 à 49 ans est légèrement plus basse que les deux groupes plus jeunes. Cependant, il ne s'agit que d'une différence de quelques points de pourcentage. Cette différence n'est pas significative, mais elle est tout de même considérable.
   \end{minipage}
 \end{figure}
 
