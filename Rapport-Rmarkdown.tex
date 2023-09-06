@@ -5,19 +5,16 @@
 \documentclass[
 ]{article}
 \usepackage{amsmath,amssymb}
+\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\fi
-\usepackage{lmodern}
-\ifPDFTeX\else
-  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -59,7 +56,7 @@
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
+\urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={Guide MVE Bébé - Rapport Quantitatif},
   pdfauthor={Yannick Dufresne, Jérémy Gilbert, Hubert Cadieux, Benjamin Carignan},
@@ -147,7 +144,7 @@ augmentent au fil des semaines de grossesses.
 \begin{figure}[htbp]
   \centering
   \begin{minipage}{0.7\textwidth}
-    \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/13_connaitreXses_canada}
+    \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/13_connaitreXses_canada.png}
   \end{minipage}%
   \begin{minipage}{0.3\textwidth}
     \textbf{}Nous remarquons également que les répondants nées hors Canada ne connaissent généralement pas le guide, notamment lorsqu'ils sont plus agés. Plus l'âge d'un répondant immigrant est faible, plus que les probabilités de connaître le guide sont élevés. Le niveau de connaissance pour un répondant né au Canada est généralement plus élevé, à l'exception d'une petite baisse pour les plus jeunes.
