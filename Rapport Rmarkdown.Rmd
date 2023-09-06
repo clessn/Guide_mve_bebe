@@ -197,7 +197,9 @@ Les tendances qui ressortent des analyses sont que le guide format papier est fa
 ```
 \vspace{10pt}
 
-![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/11guide_format_change.png){width="80%"} La difficulté de transport du guide dans son format papier semblerait être une motivation suffisante pour un peu plus que la moitié de ceux ayant répondu à la question.
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/11guide_format_change.png){width="80%"} 
+\newline
+La difficulté de transport du guide dans son format papier semblerait être une motivation suffisante pour un peu plus que la moitié de ceux ayant répondu à la question.
 
 \newpage
 
