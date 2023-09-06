@@ -68,7 +68,7 @@ Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’un
 \begin{figure}[htbp]
   \centering
   \begin{minipage}{0.7\textwidth}
-    \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/13_connaitreXses_canada.png}
+    \includegraphics[width=\linewidth, style=float:left]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/13_connaitreXses_canada.png}
   \end{minipage}%
   \begin{minipage}{0.3\textwidth}
     \textbf{}Nous remarquons également que les répondants nées hors Canada ne connaissent généralement pas le guide, notamment lorsqu'ils sont plus agés. Plus l'âge d'un répondant immigrant est faible, plus les probabilités de connaître le guide sont élevés. Le niveau de connaissance pour un répondant né au Canada est généralement plus élevé, à l'exception d'une petite baisse pour les plus jeunes.
