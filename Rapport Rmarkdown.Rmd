@@ -129,7 +129,7 @@ Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’un
     \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/Xutilise_age.png}
   \end{minipage}%
   \begin{minipage}{0.4\textwidth}
-    \textbf{} Nous retrouvons une brève tendance dans l'utilisation du guide à la baisse lorsque l'âge augmente. Cependant, l'utilisation du guide est élevée dans tout les cas. En majorité ceux qui connaissent le guide l'utilisent.
+    \textbf{} Nous retrouvons une petite tendance dans l'utilisation du guide à la baisse chez les 40 à 49 ans. Cependant, l'utilisation du guide est élevée dans tout les cas. En majorité ceux qui connaissent le guide l'utilisent.
   \end{minipage}
 \end{figure}
 ```
@@ -167,7 +167,7 @@ Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’un
     \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/3guide_format.png}
   \end{minipage}%
   \begin{minipage}{0.4\textwidth}
-    \textbf{} Le guide est consulté en majorité dans son format papier. Seulement 30 répondants affirment utiliser uniquement le guide sur le web. Le format web est tout de même utilisé par un grande proportion des répondants, mais très peu n’utilisent pas du tout la version papier, ce qui laisse présager que le web seul ne convient pas à tous.
+    \textbf{} Le guide est consulté en majorité dans son format papier. Seulement 30 répondants affirment utiliser uniquement le guide sur le web. Le format web est tout de même utilisé par un grande proportion des répondants, mais très peu n’utilisent pas du tout la version papier. Cela laisse présager que le format web seulement ne convient généralement pas.
   \end{minipage}
 \end{figure}
 ```
