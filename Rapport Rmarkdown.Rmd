@@ -83,9 +83,10 @@ Cette tendance à la hausse s'accentue davantage lorsque le répondant est encei
   \centering
   \begin{minipage}{0.7\textwidth}
     \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/13_connaitreXstatus.png}
-  \end{minipage}%
+  \end{minipage}
   \begin{minipage}{0.3\textwidth}
     \textbf{} Les répondants avec un revenu considéré comme faible sont moins enclins à connaitre le guide. Plus le revenu est élevé, plus la proportion de connaissance est grande. Cette différence est largement accentuée par le statut du parent. Les répondants enceintes pour la première fois sont ceux qui connaissent moins le guide, et c'est encore plus vrai pour ceux avec un faible revenu. Le niveau de connaissance est plus élevé et les différences sont moins accentuées pour les parents enceintes mais déjà parent. Finalement, les répondants non-enceintes et déjà parents connaissent généralement tous le guide, avec des différences minimes en fonction du revenu.
+    \end{minipage}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -94,9 +95,10 @@ Cette tendance à la hausse s'accentue davantage lorsque le répondant est encei
     \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/Xconnaitre_age.png}
   \end{minipage}%
   \begin{minipage}{0.3\textwidth}
-    \textbf{} La proportion de non-connaissance des répondants dans le groupe des 40 à 49 ans est légèrement plus élevé que les deux groupes plus jeunes. Cependant, il ne s'agit que d'une différence de quelques points de pourcentage. Cette différence n'est pas significative, mais elle est tout de même considérable.
+    \textbf{} La proportion de non-connaissance des répondants dans le groupe des 40 à 49 ans est légèrement plus élevée que les deux groupes plus jeunes. Cependant, il ne s'agit que d'une différence de quelques points de pourcentage. Cette différence n'est pas significative, mais elle est tout de même considérable.
   \end{minipage}
 \end{figure}
+
 
 \begin{figure}[htbp]
   \centering
