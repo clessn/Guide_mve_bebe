@@ -12,13 +12,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Caractéristiques du répondant
 
-![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_age.png){width=75%}
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_age.png){width=70%}
 \newline
-Nous ne retrouvons que très peu de répondants agés de 40 à 49 ans, aucun répondants de 50 ans ou plus, la majorité se trouvant dans les deux autres tranches d'âge
+Nous ne retrouvons que très peu de répondants agés de 40 à 49 ans, aucun répondants de 50 ans ou plus, la majorité se trouvant dans les deux autres tranches d'âge. Cependant, les 30 à 39 ans ont plus de répondants que les 18-29 ans. 
 
-![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_kidsLink.png){width=75%}
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_kidsLink.png){width=70%}
 \newline
-Nous remarquons que la majorité des répondants sont des mères, avec toutefois un nombre considérable de pères considérant que l'échantillonnage peut avoir mené à ce plus grand nombre de mères.
+Nous remarquons que la majorité des répondants sont des mères, avec toutefois un nombre intéressant de pères considérant que l'échantillonnage souhaité peut avoir mené à cette distortion.
 
 \newpage
 # Analyse de la connaissance et de l'utilisation du guide
@@ -37,7 +37,7 @@ Nous remarquons que la majorité des répondants sont des mères, avec toutefois
 
 \begin{minipage}{1.0\textwidth}
   \textbf{} 
-Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’une majorité des répondants au sondage connaissent le guide MVE, et de ce nombre, la majorité ont consulté le guide. Cela signifie que l’échantillon cible de ce sondage est bel et bien renseigné sur l’existence du guide, tel que souhaité.
+Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’une majorité des répondants au sondage connaissent le guide MVE, et de ce nombre, la majorité ont consulté le guide. Cela signifie que l’échantillon cible de ce sondage est bel et bien renseigné sur l’existence du guide en plus d'y trouver une utilité à sa consultation, tel que souhaité.
 
 \end{minipage}
 
@@ -46,7 +46,7 @@ Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’un
 ![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/12_connaitreXweeks.png){width=90%}
 \vspace{20pt}
 \newline
-Cependant, lorsque le niveau de connaissance est analysé selon l'avancement de la grossesse, il est possible de constater une tendance à la hausse, bien que très légère.
+Cependant, lorsque le niveau de connaissance est analysé en fonction de l'avancement de la grossesse, il est possible de constater une tendance à la hausse, bien que très légère.
 
 ![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/12_connaitreXweeksX1stkid.png){width=90%}
 \vspace{20pt}
@@ -85,8 +85,7 @@ Cette tendance à la hausse s'accentue davantage lorsque le répondant est encei
     \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/13_connaitreXstatus.png}
   \end{minipage}%
   \begin{minipage}{0.3\textwidth}
-    \textbf{} Les répondants avec un revenu considéré comme faible sont moins enclins à connaitre le guide, et plus le revenu est élevé, plus la proportion est grande. Cette différence est largement accentuée par le statut du parent. Les parents non enceintes connaissent moins le guide, et c'est encore plus vrai pour ceux avec un faible revenu. Le niveau de connaissance est plus élevé et les différences sont moins accentuées pour les parents enceintes mais déjà parent. Finalement, les répondants enceintes à leur premier enfant suivent la même structure, toutefois avec des différences plus prononcées en fonction du revenu du répondant.
-  \end{minipage}
+    \textbf{} Les répondants avec un revenu considéré comme faible sont moins enclins à connaitre le guide. Plus le revenu est élevé, plus la proportion de connaissance est grande. Cette différence est largement accentuée par le statut du parent. Les répondants enceintes pour la première fois sont ceux qui connaissent moins le guide, et c'est encore plus vrai pour ceux avec un faible revenu. Le niveau de connaissance est plus élevé et les différences sont moins accentuées pour les parents enceintes mais déjà parent. Finalement, les répondants non-enceintes et déjà parents connaissent généralement tous le guide, avec des différences minimes en fonction du revenu.
 \end{figure}
 
 \begin{figure}[htbp]
@@ -161,7 +160,6 @@ Cette tendance à la hausse s'accentue davantage lorsque le répondant est encei
     \textbf{} Le guide est consulté en majorité dans son format papier. Seulement 30 répondants affirment utiliser uniquement le guide sur le web. Le format web est tout de même utilisé par un grande proportion des répondants, mais très peu n’utilisent pas du tout la version papier, ce qui laisse présager que le web seul ne convient pas à tous.
   \end{minipage}
 \end{figure}
-
 \newpage
 ![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/5freq.png){width=75%}
 \newline
@@ -197,8 +195,15 @@ Les tendances qui ressortent des analyses sont que le guide format papier est fa
 La difficulté de transport du guide dans son format papier semblerait être une motivation suffisante pour un peu plus que la moitié de ceux ayant répondu à la question.
 
 \newpage
-
 # Conclusion - Recommandations en fonction des analyses
 
-- Ceux qui connaissent le guide l'utilisent en grande partie
+## Connaissance et utilisation du guide
 
+- Il est de règle générale que ceux qui connaissent le guide l'utilisent en grande partie. Cependant, il est possible de trouver quelques lacunes à corriger quant au niveau de connaissance du guide, bien qu'il soit assez élevé.
+- Le fait que les répondants enceintes pour la première fois connaissent moins le guide au début de leur grossesse est un constat intéressant. En effet, afin d'aider à la connaissance du guide, il serait pertinent de cibler les premières grossesses plus rapidement et de leur présenter le guide. De plus, comme le niveau de connaissance du guide augmente à chaque enfant, il serait intéressant de promouvoir l'échange du guide et d'informations entre les parents.
+- Nous remarquons également que les personnes plus âgées (40 à 49 ans) nées hors-Canada connaissent moins le guide que les plus jeunes. Il doit donc y avoir un effort pour rejoindre les immigrants plus âgés afin de leur présenter le guide. De manière générale, le niveau de connaissance du guide est bon pour les personnes nées au Canada, à l'exception des plus jeunes (18 à 29 ans). Pour eux, il sera important de les rejoindre et de leur présenter le guide, alors que les jeunes répondants nés hors-Canada connaissent très bien le guide.
+- Il est démontré plus haut qu'il y a des différences notables dans le niveau de connaissance du répondant en fonction de son statut de parent et de son niveau de revenu. Il est conseillé dans tout les cas de rejoindre davantage les personnes à plus faible revenu, car il connaissent moins le guide de manière générale. il est important aussi de se concentrer sur les personnes enceintes, surtout pour la première fois, car ils connaissent moins le guide que ceux déjà parents.
+
+## Format papier et web.
+
+- 
