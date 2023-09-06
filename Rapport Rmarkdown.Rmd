@@ -214,4 +214,12 @@ La difficulté de transport du guide dans son format papier semblerait être une
 
 ## Format papier et web.
 
--   
+- Comme le format web à lui seul ne semble pas suffir au répondant, on peut comprendre qu'il requiert plus d'attention que le format papier. Cela peut également dire que le format papier est bien ancré chez les répondants, alors que le format web est encore à apprivoiser.
+- La différence de proportion lue entre le format papier et le format web est importante, car elle met en évidence le manque d'intérêt du guide web lors de sa lecture. Le guide papier lui, semble convenir aux utilisateurs car il est généralement lu au complet, ou presque.
+- Le format web amène également moins de satisfaction chez son utilisateur. Il semble donc avoir plus de travail nécessaire sur le format web que le format papier, qui est généralement consulté, utilisé et apprécié davantage que le format web.
+- Le seul désavantage significatif du format papier est qu'il est difficile à transporter en opposition au format web. C'est normal parce que le format web peut être accessible sur un téléphone intelligent. Nous n'avons donc pas de prescription à cet effet, si ce n'est que d'alléger le format papier pour le rendre moins lourd, ou plus durable.
+- Cependant, le format web est majoritairement considéré comme difficile d'utilisation et relativement difficile d'accès. Il semble donc évident que le guide web doit être retravaillé afin de favoriser l'expérience de l'utilisateur et d'aider au transfert des connaissances. Pour le second point, il est recommandé de simplifier le chemin d'accès du guide par le web. 
+
+## Autres points
+
+- Toutes les données ne sont pas inclues dans le rapport car elles ne correspondent pas à la trame narrative que nous avons décelé dans les résultats, ou parce qu'il n'y avait pas de lien significatif entre les données lorsque croisées. 
