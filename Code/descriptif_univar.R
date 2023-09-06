@@ -32,11 +32,13 @@ link_counts <- data.frame(
 # Plot bar chart 
 ggplot(link_counts, aes(x=link_Group, y=Count)) +
   geom_bar(stat="identity", fill="#FFC300", width=0.4) +
-  geom_text(aes(label = paste0("n = ", Count)), vjust = -0.5, position = position_dodge(0.9)) +
+  geom_text(aes(label = paste0("n = ", Count)), vjust = -0.5, position = position_dodge(0.9),
+            size = 6) +
   scale_y_continuous(limits=c(0,800), breaks=seq(0, 800, by=200)) +
-  labs(title="Nombre de répondants par lien avec l'enfant", x="Type de lien", y="Nombre de répondants") +
-  clessnverse::theme_clean_light() +
-  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+  labs(title="Nombre de répondants selon le lien avec l'enfant", x="", y="Nombre de répondants") +
+  clessnverse::theme_clean_light(base_size = 19) +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1),
+        plot.title = element_text(size = 27))
 
 
 ggsave("_SharedFolder_Guide_mve/graphs/ses_kidsLink.png",
@@ -51,19 +53,20 @@ table(Data$ses_age3039)
 
 # Reshape the data
 age_counts <- data.frame(
-  Age_Group = c("18-29", "30-39", "40-49", "50 ou plus"),
+  Age_Group = c("18-29 ans", "30-39 ans", "40-49 ans"),
   Count = c(sum(Data$ses_age1829, na.rm = TRUE),
             sum(Data$ses_age3039, na.rm = TRUE),
-            sum(Data$ses_age4049, na.rm = TRUE),
-            sum(Data$ses_age50, na.rm = TRUE)))
+            sum(Data$ses_age4049, na.rm = TRUE)))
 
 # Plot bar chart
 ggplot(age_counts, aes(x=Age_Group, y=Count)) +
   geom_bar(stat="identity", fill="#FFC300", width=0.4) +
-  geom_text(aes(label = paste0("n = ", Count)), vjust = -0.5, position = position_dodge(0.9)) +
+  geom_text(aes(label = paste0("n = ", Count)), vjust = -0.5,
+            position = position_dodge(0.9), size = 6) +
   scale_y_continuous(limits=c(0,600), breaks=seq(0, 600, by=200)) +
-  labs(title="Nombre de répondants par groupe d'âge", x="Groupes d'âge", y="Nombre de répondants") +
-  clessnverse::theme_clean_light()
+  labs(title="Nombre de répondants par groupe d'âge",
+       x="", y="Nombre de répondants") +
+  clessnverse::theme_clean_light(base_size = 19)
 
 ggsave("_SharedFolder_Guide_mve/graphs/ses_age.png", 
        width = 10, height = 8)
@@ -100,8 +103,8 @@ ggplot(canada_counts, aes(x=Canada_Group, y=Count)) +
   geom_bar(stat="identity", fill="#FFC300", width=0.4) +
   geom_text(aes(label = paste0("n = ", Count)), vjust = -0.5, position = position_dodge(0.9)) +
   scale_y_continuous(limits=c(0,900), breaks=seq(0, 900, by=200)) +
-  labs(title="Nombre de répondants nés au Canada", x="né au Canada?", y="Nombre de répondants") +
-  clessnverse::theme_clean_light()
+  labs(title="Nombre de répondants nés au Canada", x="Né au Canada?", y="Nombre de répondants") +
+  clessnverse::theme_clean_light(base_size = 16)
 
 ggsave("_SharedFolder_Guide_mve/graphs/ses_immigrant.png", 
        width = 10, height = 8)
@@ -167,7 +170,7 @@ ggplot(Data, aes(x=ses_kids_2)) +
   scale_x_discrete(limits=c("0", "1", "2", "3", "4", "5+")) +
   scale_y_continuous(limits=c(0,400), breaks=seq(0, 400, by=50)) +
   labs(title="Nombre d'enfants par foyer", x="Nombre d'enfants", y="Nombre de répondants") +
-  clessnverse::theme_clean_light()
+  clessnverse::theme_clean_light(base_size = 16)
 ggsave("_SharedFolder_Guide_mve/graphs/ses_kids.png", 
        width = 10, height = 8)
 

@@ -24,8 +24,9 @@ Data %>%
                               "1" = "Oui",
                               "NA" = "N'a pas répondu")) +
   scale_y_continuous(limits = c(0,950)) +
-  clessnverse::theme_clean_light(base_size = 15) +
-  geom_text(aes(y = n + 15, label = paste0("n = ", n))) +
+  clessnverse::theme_clean_light(base_size = 21) +
+  geom_text(aes(y = n + 19, label = paste0("n = ", n)),
+            size = 6) +
   ylab("Nombre de répondants") +
   xlab("") +
   labs(caption = "Les 926 répondants du sondage sont représentés sur ce graphique.",
@@ -58,8 +59,9 @@ ggplot(Graph, aes(x = guide_use_1, y = n)) +
                               "1" = "Oui",
                               "NA" = "N'a pas répondu")) +
   scale_y_continuous(limits = c(0,950)) +
-  clessnverse::theme_clean_light(base_size = 15) +
-  geom_text(aes(y = n + 15, label = paste0("n = ", n))) +
+  clessnverse::theme_clean_light(base_size = 21) +
+  geom_text(aes(y = n + 19, label = paste0("n = ", n)),
+            size = 6) +
   ylab("Nombre de répondants") +
   xlab("") +
   labs(caption = paste0("Les ", sum(Graph$n), " répondants qui connaissent le guide MVE sont représentés sur ce graphique."),

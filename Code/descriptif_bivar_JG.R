@@ -321,7 +321,8 @@ data_age_summary$Age_Group <- recode(data_age_summary$Age_Group,
 # Création du graphique à barres
 ggplot(data_age_summary, aes(x = Age_Group, y = Proportion, fill = as.factor(guide_connaitre))) +
   geom_bar(stat = "identity", position = "dodge") +
-  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
+  geom_text(aes(label = paste0("n = ", Frequency)), size = 6,
+            vjust = -0.5, position = position_dodge(0.9)) +
   labs(
     title = "Connaissance du guide par tranche d'âge",
     x = "",
@@ -330,7 +331,7 @@ ggplot(data_age_summary, aes(x = Age_Group, y = Proportion, fill = as.factor(gui
   ) +
   scale_fill_manual(values = c("#FF6B6B", "#95E08E"), 
                     labels = c("Ne connaît pas le guide", "Connaît le guide")) +
-  clessnverse::theme_clean_light() +
+  clessnverse::theme_clean_light(base_size = 16) +
   theme(axis.text.x = element_text(hjust = 1))
 
 ggsave("_SharedFolder_Guide_mve/graphs/Xconnaitre_age.png", 
@@ -383,7 +384,7 @@ data_region_summary <- rbind(data_region_summary,
 
 
 data_region_summary$region_Group <- recode(data_region_summary$region_Group, 
-                                     "ses_regionabitibi" = "Abitibi-Témiscamingue",
+                                     "ses_regionabitibi" = "Abitibi",
                                      "ses_regionchaudiere" = "Chaudière-Appalaches",
                                      "ses_regioniles" = "Gaspésie-Îles-de-la-Madeleine",
                                      "ses_regionmauricie" = "Mauricie", 
@@ -413,16 +414,20 @@ data_region_summary$region_Group <- factor(data_region_summary$region_Group, lev
 # 3. Création du graphique à barres
 ggplot(data_region_summary, aes(x = region_Group, y = Proportion, fill = as.factor(guide_connaitre))) +
   geom_bar(stat = "identity", position = "dodge") +
-  geom_text(aes(label = paste0("n = ", Frequency)), vjust = -0.5, position = position_dodge(0.9)) +
+  geom_text(aes(label = paste0("n = ", Frequency),
+                y = Proportion + 2),
+            position = position_dodge(0.9), hjust = 0,
+            angle = 90) +
   labs(
     title = "Connaissance du guide par région",
     x = "",
     y = "Proportion des répondants (%)",
     fill = "Connaît le guide"
   ) +
+  scale_y_continuous(limits = c(0, 105)) +
   scale_fill_manual(values = c("#FF6B6B", "#95E08E"), 
                     labels = c("Ne connaît pas le guide", "Connaît le guide")) +
-  clessnverse::theme_clean_light() +
+  clessnverse::theme_clean_light(base_size = 16) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ggsave("_SharedFolder_Guide_mve/graphs/Xconnaitre_region.png", 
@@ -482,7 +487,7 @@ ggplot(data_educ_summary, aes(x = educ_Group, y = Proportion, fill = as.factor(g
   ) +
   scale_fill_manual(values = c("#FF6B6B", "#95E08E"), 
                     labels = c("Ne connaît pas le guide", "Connaît le guide")) +
-  clessnverse::theme_clean_light() +
+  clessnverse::theme_clean_light(base_size = 16) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ggsave("_SharedFolder_Guide_mve/graphs/Xconnaitre_educ.png", 
