@@ -589,12 +589,17 @@ table(Clean$ses_age50)
 
 table(Raw$ses_sex_ori)
 
+#Clean$ses_couple <- 0
+#Clean$ses_couple[Raw$ses_sex_ori == "Autre"] <- 1
+#Clean$ses_couple <- NA
+#Clean$ses_couple[Raw$ses_sex_ori == "Couple"] <- 1
+#Clean$ses_couple[Raw$ses_sex_ori %in% c("Autre", "Famille monoparentale")] <- 0
+#Clean$ses_couple <- 0
+#Clean$ses_couple[Raw$ses_sex_ori == "Famille monoparentale"] <- 1
 Clean$ses_coupleautre <- 0
-Clean$ses_coupleautre[Raw$ses_sex_ori == "Autre"] <- 1
+Clean$ses_coupleautre[Raw$ses_sex_ori %in% c("Autre", "Famille monoparentale")] <- 1
 Clean$ses_couple <- 0
 Clean$ses_couple[Raw$ses_sex_ori == "Couple"] <- 1
-Clean$ses_monoparental <- 0
-Clean$ses_monoparental[Raw$ses_sex_ori == "Famille monoparentale"] <- 1
 
 table(Raw$ses_immigrant)
 

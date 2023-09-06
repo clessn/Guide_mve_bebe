@@ -212,19 +212,68 @@ ggsave("_SharedFolder_Guide_mve/graphs/5freq.png",
 
 
 
-## comparer guide_paperfrequency et guide_web_freq
+# Connait X ses_week ------------------------------------------------------
 
-## comparer guide_paper_prop et guide_web_prop
+Data %>% 
+  mutate(ses_week = as.numeric(ses_week),
+         ses_week_group = cut(ses_week,
+                              breaks = seq(0, 40, by = 5),
+                              ordered_result = TRUE,
+                              right = FALSE)) %>% 
+  group_by(ses_week_group, guide_connaitre) %>%
+  summarise(n = n()) %>%
+  group_by(ses_week_group) %>% 
+  mutate(n_group = sum(n),
+         prop = n/n_group) %>% 
+  drop_na() %>% 
+  filter(guide_connaitre == 1) %>% 
+  ggplot(aes(x = ses_week_group, y = prop*100)) +
+  geom_bar(stat = "identity",
+           fill = "#FFC300",
+           width = 0.75) +
+  geom_text(aes(label = paste0("n = ", n_group),
+                y = prop * 100 + 1.5)) +
+  clessnverse::theme_clean_light() +
+  ylab("Proportion qui connait\nle guide MVE (%)") +
+  xlab("Nombre de semaines de grossesse") +
+  ggtitle("Connaissance du guide MVE selon l'avancement de la grossesse")
 
-## comparer satisfaction_papier et satisfaction_papier
-
-## guide_change pour les en ligne
-
-## guide_papier_prac VS guide_web_prac
-
-## guide_papier_dis VS guide_web_dis
-
-## guide_format_change
+ggsave("_SharedFolder_Guide_mve/graphs/12_connaitreXweeks.png",
+       width = 10, height = 6)
 
 
+Data %>% 
+  mutate(ses_week = as.numeric(ses_week),
+         ses_week_group = cut(ses_week,
+                              breaks = seq(0, 40, by = 5),
+                              ordered_result = TRUE,
+                              right = FALSE),
+         filt_1stkid = case_when(
+           filt_1stkid == 1 ~ "Premier enfant",
+           filt_1stkid == 0 ~ "Pas le premier enfant"
+         )) %>% 
+  group_by(ses_week_group, filt_1stkid, guide_connaitre) %>%
+  summarise(n = n()) %>%
+  group_by(ses_week_group, filt_1stkid) %>% 
+  mutate(n_group = sum(n),
+         prop = n/n_group) %>% 
+  drop_na() %>% 
+  filter(guide_connaitre == 1) %>% 
+  ggplot(aes(x = ses_week_group, y = prop*100)) +
+  geom_bar(stat = "identity",
+           fill = "#FFC300",
+           width = 0.6) +
+  facet_wrap(~filt_1stkid,
+             ncol = 1) +
+  geom_text(aes(label = paste0("n = ", n_group),
+                y = prop * 100 + 2.5)) +
+  clessnverse::theme_clean_light() +
+  ylab("Proportion qui connait\nle guide MVE (%)") +
+  xlab("Nombre de semaines de grossesse") +
+  ggtitle("Connaissance du guide MVE selon l'avancement de la grossesse") +
+  theme(axis.title.y = element_text(hjust = 0.5, size = 12),
+        strip.text.x = element_text(size = 18))
+
+ggsave("_SharedFolder_Guide_mve/graphs/12_connaitreXweeksX1stkid.png",
+       width = 8, height = 10)
 
