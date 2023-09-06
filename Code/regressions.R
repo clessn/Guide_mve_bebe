@@ -67,6 +67,7 @@ table(Data$ses_educ)
 ## Who does not know the guide? --------------------------------------------
 
 table(Data$guide_connaitre)
+table(Data$guide_connaitre, Data$yparent_status)
 
 ### Model -------------------------------------------------------------------
 
@@ -211,15 +212,12 @@ graph <- df_fin %>%
         "1" = "Élevé\n(100 000$ et plus)"
       )
     ),
-    yparent_status = factor(
-      as.character(yparent_status),
-      labels = c(
-        "parent_not_preg" = "Parents non enceints",
-        "firstkid" = "Enceints du\npremier enfant",
-        "parent_preg" = "Enceints,\ndéjà parents"
+    yparent_status = case_when(
+      yparent_status == "parent_not_preg" ~ "Parents non enceintes",
+      yparent_status == "firstkid" ~ "Enceintes du\npremier enfant",
+      yparent_status == "parent_preg" ~ "Enceintes,\ndéjà parents"
       )
     )
-  )
 
 ggplot(graph, aes(x = mean, y = yparent_status)) +
   geom_pointrange(aes(xmin = low,
