@@ -76,14 +76,21 @@ Tel que présenté dans les graphiques ci-dessus, nous pouvons constater qu’un
   \end{minipage}
 \end{figure}
 ```
-\\begin{figure}[htbp] \centering
+
 
 ```{=tex}
 \begin{minipage}{0.7\textwidth}
     \includegraphics[width=\linewidth]{../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/13_connaitreXstatus.png}
   \end{minipage}
 ```
-\% \\begin{minipage}{0.3\textwidth} \textbf{} Les répondants avec un revenu considéré comme faible sont moins enclins à connaitre le guide. Plus le revenu est élevé, plus la proportion de connaissance est grande. Cette différence est largement accentuée par le statut du parent. Les répondants enceintes pour la première fois sont ceux qui connaissent moins le guide, et c'est encore plus vrai pour ceux avec un faible revenu. Le niveau de connaissance est plus élevé et les différences sont moins accentuées pour les parents enceintes mais déjà parent. Finalement, les répondants non-enceintes et déjà parents connaissent généralement tous le guide, avec des différences minimes en fonction du revenu. \\end{figure}
+
+```{=tex}
+\begin{figure}[htbp] 
+\centering
+\begin{minipage}{0.3\textwidth} \textbf{} Les répondants avec un revenu considéré comme faible sont moins enclins à connaitre le guide. Plus le revenu est élevé, plus la proportion de connaissance est grande. Cette différence est largement accentuée par le statut du parent. Les répondants enceintes pour la première fois sont ceux qui connaissent moins le guide, et c'est encore plus vrai pour ceux avec un faible revenu. Le niveau de connaissance est plus élevé et les différences sont moins accentuées pour les parents enceintes mais déjà parent. Finalement, les répondants non-enceintes et déjà parents connaissent généralement tous le guide, avec des différences minimes en fonction du revenu.
+\end{figure}
+ \end{minipage}
+```
 
 ```{=tex}
 \begin{figure}[htbp]
