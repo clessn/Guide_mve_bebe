@@ -13,6 +13,44 @@ RawData <- read.csv("_SharedFolder_Guide_mve/data/INSPQ-guide-mve_RAW.csv",
                     encoding = "UTF-8")
 
 
+
+#  guide_format_ess
+
+table(Data$guide_format_esspapierweb)
+table(Data$guide_format_esssolopaper)
+table(Data$guide_format_essmostlypaper)
+table(Data$guide_format_esssolowebhtml)
+table(Data$guide_format_esssolowebpdf)
+table(Data$guide_format_essmostlywebpdf)
+table(Data$guide_format_essmostlywebhtml)
+
+# Reshape the data
+essential_counts <- data.frame(
+  essential_Group = c("Les deux formats -papier \n et web- de façon égale", "Uniquement le \n format papier", 
+                      "Principalement le \n format papier", "Uniquement le \n format web PDF", "Uniquement le \n format web HTML", 
+                      "Principalement le \n format web PDF", "Principalement le \n format web HTML"),
+  Count = c(sum(Data$guide_format_esspapierweb, na.rm = TRUE),
+            sum(Data$guide_format_esssolopaper, na.rm = TRUE),
+            sum(Data$guide_format_essmostlypaper, na.rm = TRUE),
+            sum(Data$guide_format_esssolowebhtml, na.rm = TRUE),
+            sum(Data$guide_format_esssolowebpdf, na.rm = TRUE),
+            sum(Data$guide_format_essmostlywebpdf, na.rm = TRUE),
+            sum(Data$guide_format_essmostlywebhtml, na.rm = TRUE)))
+
+# Plot bar chart 
+ggplot(essential_counts, aes(x=essential_Group, y=Count)) +
+  geom_bar(stat="identity", fill="#FFC300", width=0.4) +
+  geom_text(aes(label = paste0("n = ", Count)), vjust = -0.5, position = position_dodge(0.9),
+            size = 6) +
+  scale_y_continuous(limits=c(0,200), breaks=seq(0, 200, by=20)) +
+  labs(title="Quel format est plus essentiel ?", x="", y="Nombre de répondants") +
+  clessnverse::theme_clean_light(base_size = 19) +
+  theme(axis.text.x = element_text(angle = 35, hjust = 1),
+        plot.title = element_text(size = 19))
+
+ggsave("_SharedFolder_Guide_mve/graphs/guide_format_ess.png",
+       width = 12, height = 11)
+
 # SES -------------------------------------------------------------------
 
 # ses_link_kid
@@ -148,6 +186,17 @@ language_counts <- data.frame(
     sum(Data$ses_languagefr, na.rm = TRUE),
     sum(Data$ses_languagearab, na.rm = TRUE)))
 
+ggplot(language_counts, aes(x=Language_Group, y=Count)) +
+  geom_bar(stat="identity", fill="#FFC300", width=0.4) +
+  geom_text(aes(label = paste0("n = ", Count)), vjust = -0.5, position = position_dodge(0.9)) +
+  scale_x_discrete(limits=c("Both", "English", "French", "Arab")) +
+  scale_y_continuous(limits=c(0,1000), breaks=seq(0, 1000, by=200)) +
+  labs(title="Nombre de répondants selon la langue utilisée quotidiennement", x="langue", y="Nombre de répondants") +
+  clessnverse::theme_clean_light(base_size = 16) +
+  theme(plot.title = element_text(size = 19))
+
+ggsave("_SharedFolder_Guide_mve/graphs/ses_language.png", 
+       width = 10, height = 8)
 #_______________________________________________________________________________
 
 # NOMBRE DE KIDS
@@ -182,9 +231,9 @@ ggsave("_SharedFolder_Guide_mve/graphs/ses_kids.png",
 region_counts <- data.frame(
   Region_Group = c("Nord-du-Québec", "Mauricie", "Lanaudière", 
                    "En dehors de Québec", "Centre-du-Québec", 
-                   "Abitibi-Témiscamingue", "Bas-Saint-Laurent", "Chaudière-Appalaches",
-                   "Estrie", "Laurentides", "Montérégie", "Outaouais", "Saguenay-Lac-Saint-Jean",
-                   "Montréal", "Laval", "Gaspésie-Îles-de-la-Madeleine", "Côte-Nord", "Capitale-Nationale"),
+                   "Abitibi-\nTémiscamingue", "Bas-Saint-Laurent", "Chaudière-Appalaches",
+                   "Estrie", "Laurentides", "Montérégie", "Outaouais", "Saguenay-Lac\n-Saint-Jean",
+                   "Montréal", "Laval", "Gaspésie-Îles-\nde-la-Madeleine", "Côte-Nord", "Capitale-Nationale"),
   Count = c(
     sum(Data$ses_regionabitibi, na.rm = TRUE),
     sum(Data$ses_regionchaudiere, na.rm = TRUE),
@@ -207,19 +256,26 @@ region_counts <- data.frame(
 
 
 ggplot(region_counts, aes(x=Region_Group, y=Count)) +
-  geom_bar(stat="identity", fill="black", width=0.4) +
+  geom_bar(stat="identity", fill="#FFC300", width=0.4) +
+  geom_text(aes(label = paste0("n = ", Count)), vjust = -0.5, position = position_dodge(0.9),
+            size = 3) +
   scale_y_continuous(limits=c(0,180), breaks=seq(0, 180, by=20)) +
   labs(title="Nombre de répondants par région", x="Région", y="Nombre de répondants") +
-  theme_clean() +
-  theme(axis.text.x = element_text(angle = 35, hjust = 1))        
+  clessnverse::theme_clean_light(base_size = 16) +  
+  theme(axis.text.x = element_text(angle = 35, hjust = 1),
+        plot.title = element_text(size = 19))
+
+
+ggsave("_SharedFolder_Guide_mve/graphs/ses_region.png", 
+       width = 16, height = 10)
 #_______________________________________________________________________________
 
 # ses_education
 
 education_counts <- data.frame(
-  Education_Group = c("Secondaire sans diplôme de secondaire V", "Universitaire maîtrise",
-                      "Autre formation -spécifier-", "Primaire", "Universitaire baccalauréat",
-                      "Collégial -préciser-", "Secondaire avec diplôme de secondaire V", "Universitaire doctorat"),
+  Education_Group = c("Secondaire sans diplôme \n de secondaire V", "Universitaire maîtrise",
+                      "Autre formation\n -spécifier-", "Primaire", "Universitaire baccalauréat",
+                      "Collégial -préciser-", "Secondaire avec diplôme \n de secondaire V", "Universitaire doctorat"),
   Count = c(
     sum(Data$ses_educationsans5, na.rm = TRUE),
     sum(Data$ses_educationmaitrise, na.rm = TRUE),
@@ -232,11 +288,17 @@ education_counts <- data.frame(
 
 
 ggplot(education_counts, aes(x=Education_Group, y=Count)) +
-  geom_bar(stat="identity", fill="black", width=0.4) +
+  geom_bar(stat="identity", fill="#FFC300", width=0.4) +
+  geom_text(aes(label = paste0("n = ", Count)), vjust = -0.5, position = position_dodge(0.9),
+            size = 4) +
   scale_y_continuous(limits=c(0,350), breaks=seq(0, 350, by=50)) +
-  labs(title="Nombre de répondants par niveau d'éducation", x="niveau d'éducation", y="Nombre de répondants") +
-  theme_clean() +
-  theme(axis.text.x = element_text(angle = 35, hjust = 1))
+  labs(title="Nombre de répondants par niveau d'éducation", x="Niveau d'éducation", y="Nombre de répondants") +
+  clessnverse::theme_clean_light(base_size = 16) +  
+  theme(axis.text.x = element_text(angle = 35, hjust = 1),
+        plot.title = element_text(size = 19))
+
+ggsave("_SharedFolder_Guide_mve/graphs/ses_education.png", 
+       width = 10, height = 8)
 #_______________________________________________________________________________
 
 # ses_job
