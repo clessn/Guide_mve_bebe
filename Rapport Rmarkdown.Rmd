@@ -237,3 +237,6 @@ Les répondants dans la catégorie "autre formation" ont presque tous indiqué a
 ![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/guide_format_ess.png)
 
 Les répondants ont une préférence claire pour le format papier. Plus de la moitié des répondants considèrent que le papier est essentiel, que ce soit également au format web que uniquement le format papier. Nous retrouvons une mince préférence pour le format web HTML par rapport au format web PDF. Somme toute, le format web est considéré comme moins essentiel que le format papier.
+
+
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_immigrant_year.png)
