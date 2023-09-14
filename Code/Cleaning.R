@@ -611,7 +611,8 @@ table(Raw$ses_immigrant_year)
 table(Raw$ses_immigrant_year_1_TEXT)
 
 Clean$ses_immigrant_year <- NA
-Clean$ses_immigrant_year <- Raw$ses_immigrant_year
+Clean$ses_immigrant_year <- as.character(Raw$ses_immigrant_year)
+Clean$ses_immigrant_year <- as.numeric(Clean$ses_immigrant_year)
 table(Clean$ses_immigrant_year)
 
 table(Raw$ses_language)

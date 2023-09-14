@@ -151,21 +151,21 @@ ggsave("_SharedFolder_Guide_mve/graphs/ses_immigrant.png",
 # Reshape the data
 table(Data$ses_immigrant_year)
 
-Data$ses_immigrant_year[Data$ses_immigrant_year == 1] <- "1"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 2] <- "2"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 3] <- "3"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 4] <- "4"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 5] <- "5"
-Data$ses_immigrant_year[Data$ses_immigrant_year >= 6 & Data$ses_immigrant_year <= 9] <- "6-9"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 10] <- "10"
-Data$ses_immigrant_year[Data$ses_immigrant_year >= 11 & Data$ses_immigrant_year <= 14] <- "11-14"
-Data$ses_immigrant_year[Data$ses_immigrant_year >= 15 & Data$ses_immigrant_year <= 19] <- "15-19"
-Data$ses_immigrant_year[Data$ses_immigrant_year >= 20 & Data$ses_immigrant_year <= 24] <- "20-24"
-Data$ses_immigrant_year[Data$ses_immigrant_year >= 25 & Data$ses_immigrant_year <= 29] <- "25-29"
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 1 & Data$ses_immigrant_year <= 5] <- "1-5" 
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 6 & Data$ses_immigrant_year <= 10] <- "6-10"
+
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 11 & Data$ses_immigrant_year <= 15] <- "11-15" 
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 16 & Data$ses_immigrant_year <= 20] <- "16-20" 
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 21 & Data$ses_immigrant_year <= 25] <- "21-25" 
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 26] <- "26+"
+
+
+print(sum(Data$ses_immigrant_year >= 1 & Data$ses_immigrant_year <= 5))
+print(sum(Data$ses_immigrant_year >= 6 & Data$ses_immigrant_year <= 10))
 
 ggplot(Data, aes(x=ses_immigrant_year)) +
   geom_bar(fill="black", width=0.3) +
-  scale_x_discrete(limits=c("1", "2", "3", "4", "5", "6-9", "10", "11-14", "15-19", "20-24", "25-29", "30+")) +
+  scale_x_discrete(limits=c("1-5", "6-10", "11-15", "15-20", "21-25", "26+")) +
   scale_y_continuous(limits=c(0,60), breaks=seq(0, 60, by=10)) +
   labs(title="Années depuis l'arrivée au Québec", x="Nombre d'années", y="Nombre de répondants") +
   theme_clean()

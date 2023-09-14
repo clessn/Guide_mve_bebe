@@ -222,3 +222,18 @@ La difficulté de transport du guide dans son format papier semblerait être une
 - Le format web amène également moins de satisfaction chez son utilisateur. Il semble donc avoir plus de travail nécessaire sur le format web que le format papier, qui est généralement consulté, utilisé et apprécié davantage que le format web.
 - Le seul désavantage significatif du format papier est qu'il est difficile à transporter en opposition au format web. C'est normal parce que le format web peut être accessible sur un téléphone intelligent. Nous n'avons donc pas de prescription à cet effet, si ce n'est que d'alléger le format papier pour le rendre moins lourd, ou plus durable.
 - Cependant, le format web est majoritairement considéré comme difficile d'utilisation et relativement difficile d'accès. Il semble donc évident que le guide web doit être retravaillé afin de favoriser l'expérience de l'utilisateur et d'aider au transfert des connaissances. Pour le second point, il est recommandé de simplifier le chemin d'accès du guide par le web.
+
+# Nouveaux graphiques demandés
+
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_region.png)
+Les données récoltées n'indiquent pas de tendance, si ce n'est qu'il y a une majorité de répondants en Estrie et en Montérégie. Certaines régions semblent avoir été délaissés et démontrent que l'échantillon n'est pas parfaitement représentatif de la population du Québec.
+
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_language.png)
+Il n'y a pas de tendance, presque l'entièreté des répondants sont francophones. Il serait intéressant de produire et d'administrer le questionnaire en anglais.
+
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_education.png)
+Les répondants dans la catégorie "autre formation" ont presque tous indiqué avoir un diplôme du niveau collégial (technique, DEC, DEP, pré-universitaires). Sinon, la majorité des répondants sont de niveau universitaire ( baccalauréat), ce qui peut indiquer que les jeunes parents atteignent généralement ce niveau d'étude avant de fonder une famille. Cependant, il peut également s'agir d'un biais de sélection chez les répondants de la firme, tel que c'est le cas ci-dessus pour les régions.
+
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/guide_format_ess.png)
+
+Les répondants ont une préférence claire pour le format papier. Plus de la moitié des répondants considèrent que le papier est essentiel, que ce soit également au format web que uniquement le format papier. Nous retrouvons une mince préférence pour le format web HTML par rapport au format web PDF. Somme toute, le format web est considéré comme moins essentiel que le format papier.
