@@ -147,38 +147,54 @@ ggplot(canada_counts, aes(x=Canada_Group, y=Count)) +
 ggsave("_SharedFolder_Guide_mve/graphs/ses_immigrant.png", 
        width = 10, height = 8)
 
-# REVOIR J'AI ESSAYÉ MAIS ÇA PEUT ÊTRE MIEUX
-# Reshape the data
-table(Data$ses_immigrant_year)
 
-Data$ses_immigrant_year[Data$ses_immigrant_year >= 1 & Data$ses_immigrant_year <= 5] <- "1-5" 
-Data$ses_immigrant_year[Data$ses_immigrant_year == 6] <- "6-10"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 7] <- "6-10"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 8] <- "6-10"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 9] <- "6-10"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 10] <- "6-10"
-Data$ses_immigrant_year[Data$ses_immigrant_year >= 11 & Data$ses_immigrant_year <= 15] <- "11-15" 
-Data$ses_immigrant_year[Data$ses_immigrant_year >= 16 & Data$ses_immigrant_year <= 20] <- "16-20" 
-Data$ses_immigrant_year[Data$ses_immigrant_year >= 21 & Data$ses_immigrant_year <= 25] <- "21-25" 
-Data$ses_immigrant_year[Data$ses_immigrant_year >= 26 & Data$ses_immigrant_year <= 30] <- "26-30"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 33] <- "30+"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 34] <- "30+"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 35] <- "30+"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 38] <- "30+"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 41] <- "30+"
-Data$ses_immigrant_year[Data$ses_immigrant_year == 42] <- "30+"
 
+sumcum <- Data %>% 
+  group_by(ses_immigrant_year) %>% 
+  summarise(n = n()) %>% 
+  ungroup() %>% 
+  mutate(sumcum = cumsum(n))
 
 ggplot(Data, aes(x=ses_immigrant_year)) +
+  geom_bar(data = cumsum, aes(x = ses_immigrant_year,
+                              y = sumcum),
+           stat = "identity",
+           fill = "grey", alpha = 0.6) +
   geom_bar(fill="#FFC300", width=0.3) +
-  scale_x_discrete(limits=c("1-5", "6-10", "11-15", "16-20", "21-25", "26-30", "30+")) +
+  #scale_x_discrete(limits=c("1-5", "6-10", "11-15", "16-20", "21-25", "26-30", "30+")) +
   scale_y_continuous(limits=c(0,30), breaks=seq(0, 30, by=5)) +
   labs(title="Années depuis l'arrivée au Québec", x="Nombre d'années", y="Nombre de répondants") +
   clessnverse::theme_clean_light(base_size = 16) +
   theme(plot.title = element_text(size = 19))
 
-ggsave("_SharedFolder_Guide_mve/graphs/ses_immigrant_year.png", 
+
+
+ggsave("_SharedFolder_Guide_mve/graphs/ses_immigrant_year2.png", 
        width = 10, height = 8)
+
+
+# REVOIR J'AI ESSAYÉ MAIS ÇA PEUT ÊTRE MIEUX
+# Reshape the data
+table(Data$ses_immigrant_year)
+
+#Data$ses_immigrant_year[Data$ses_immigrant_year >= 1 & Data$ses_immigrant_year <= 5] <- "1-5" 
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 6] <- "6-10"
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 7] <- "6-10"
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 8] <- "6-10"
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 9] <- "6-10"
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 10] <- "6-10"
+#Data$ses_immigrant_year[Data$ses_immigrant_year >= 11 & Data$ses_immigrant_year <= 15] <- "11-15" 
+#Data$ses_immigrant_year[Data$ses_immigrant_year >= 16 & Data$ses_immigrant_year <= 20] <- "16-20" 
+#Data$ses_immigrant_year[Data$ses_immigrant_year >= 21 & Data$ses_immigrant_year <= 25] <- "21-25" 
+#Data$ses_immigrant_year[Data$ses_immigrant_year >= 26 & Data$ses_immigrant_year <= 30] <- "26-30"
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 33] <- "30+"
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 34] <- "30+"
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 35] <- "30+"
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 38] <- "30+"
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 41] <- "30+"
+#Data$ses_immigrant_year[Data$ses_immigrant_year == 42] <- "30+"
+
+
 
 #_______________________________________________________________________________
 
@@ -188,7 +204,7 @@ table(Data$ses_languageboth)
 
 # Reshape the data
 language_counts <- data.frame(
-  Language_Group = c("Both", "English", "French", "Arab"),
+  Language_Group = c("Français et\nanglais", "Anglais", "Français", "Arabe"),
   Count = c(
     sum(Data$ses_languageboth, na.rm = TRUE),
     sum(Data$ses_languageeng, na.rm = TRUE),
@@ -198,8 +214,9 @@ language_counts <- data.frame(
 ggplot(language_counts, aes(x=Language_Group, y=Count)) +
   geom_bar(stat="identity", fill="#FFC300", width=0.4) +
   geom_text(aes(label = paste0("n = ", Count)), vjust = -0.5, position = position_dodge(0.9)) +
-  scale_x_discrete(limits=c("Both", "English", "French", "Arab")) +
+  scale_x_discrete(limits=c("Français et\nanglais", "Anglais", "Français", "Arabe")) +
   scale_y_continuous(limits=c(0,1000), breaks=seq(0, 1000, by=200)) +
+  xlab("") +
   labs(title="Nombre de répondants selon la langue utilisée quotidiennement", x="langue", y="Nombre de répondants") +
   clessnverse::theme_clean_light(base_size = 16) +
   theme(plot.title = element_text(size = 19))

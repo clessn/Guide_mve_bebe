@@ -30,7 +30,7 @@ Data %>%
   ylab("Nombre de répondants") +
   xlab("") +
   labs(caption = "Les 926 répondants du sondage sont représentés sur ce graphique.",
-       title = "Connaissez-vous le guide MVE?")
+       title = "Connaissez-vous le guide MVE?\n")
 
 ggsave("_SharedFolder_Guide_mve/graphs/1guide_connaitre.png",
        width = 10, height = 8)
@@ -279,3 +279,7 @@ Data %>%
 ggsave("_SharedFolder_Guide_mve/graphs/12_connaitreXweeksX1stkid.png",
        width = 8, height = 10)
 
+
+# n years immi X connaissance  --------------------------------------------
+
+Graph3 <- 
