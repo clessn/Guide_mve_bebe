@@ -239,10 +239,10 @@ Les répondants dans la catégorie "autre formation" ont presque tous indiqué a
 Les répondants ont une préférence claire pour le format papier. Plus de la moitié des répondants considèrent que le papier est essentiel, que ce soit également au format web que uniquement le format papier. Nous retrouvons une mince préférence pour le format web HTML par rapport au format web PDF. Somme toute, le format web est considéré comme moins essentiel que le format papier.
 
 
-![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_immigrant_year.png)
+![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_immigrant_year.png)git s
 
-Parmi les 73 répondants immigrants du sondage, 42 d'entre eux (soit 58 %) sont arrivés au Canada il y a moins de 10 ans. Cependant, 71% des immigrants qui ne connaissent pas le guide sont également ici depuis 10 ans et moins. Ce groupe est moins enclin à connaitre le guide par rapport aux immigrants qui restent au Canada depuis plus longtemps.
+
 
 ![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_immigrant_yearXconnaissance.png)
 
-
+Parmi les 73 répondants immigrants du sondage, 42 d'entre eux (soit 58 %) sont arrivés au Canada il y a moins de 10 ans. Cependant, 71% des immigrants qui ne connaissent pas le guide sont également ici depuis 10 ans et moins. Ce groupe est moins enclin à connaitre le guide par rapport aux immigrants qui restent au Canada depuis plus longtemps.
