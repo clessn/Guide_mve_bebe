@@ -282,4 +282,62 @@ ggsave("_SharedFolder_Guide_mve/graphs/12_connaitreXweeksX1stkid.png",
 
 # n years immi X connaissance  --------------------------------------------
 
-Graph3 <- 
+Data$ses_immigrant_year2[Data$ses_immigrant_year >= 1 & Data$ses_immigrant_year <= 5] <- "1-5" 
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 6] <- "6-10"
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 7] <- "6-10"
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 8] <- "6-10"
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 9] <- "6-10"
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 10] <- "6-10"
+Data$ses_immigrant_year2[Data$ses_immigrant_year >= 11 & Data$ses_immigrant_year <= 15] <- "11-15" 
+Data$ses_immigrant_year2[Data$ses_immigrant_year >= 16 & Data$ses_immigrant_year <= 20] <- "16-20" 
+Data$ses_immigrant_year2[Data$ses_immigrant_year >= 21 & Data$ses_immigrant_year <= 25] <- "21-25" 
+Data$ses_immigrant_year2[Data$ses_immigrant_year >= 26 & Data$ses_immigrant_year <= 30] <- "26-30"
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 33] <- "30+"
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 34] <- "30+"
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 35] <- "30+"
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 38] <- "30+"
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 41] <- "30+"
+Data$ses_immigrant_year2[Data$ses_immigrant_year == 42] <- "30+"
+
+table(Data$ses_immigrant_year2)
+
+Graph3 <- Data %>% 
+  group_by(ses_immigrant_year2, guide_connaitre) %>% 
+  summarise(n = n()) %>% 
+  group_by(ses_immigrant_year2) %>% 
+  mutate(total = sum(n),
+         prop = n/total*100,
+         guide_connaitre = factor(guide_connaitre, levels = c("0", "1"))) %>% 
+  ungroup() %>% 
+  mutate(prop = ifelse(guide_connaitre == 1, prop, NA)) %>% 
+  drop_na(ses_immigrant_year2)
+
+ggplot(Graph3, aes(x = ses_immigrant_year2, y = n)) +
+  geom_bar(aes(alpha = guide_connaitre),
+           stat = "identity",
+           fill = "#FFC300") +
+  scale_x_discrete(limits=c("1-5", "6-10", "11-15", "16-20", "21-25", "26-30", "30+")) +
+  clessnverse::theme_clean_light() +
+  scale_alpha_discrete(labels = c("0" = "Ne connait pas le guide",
+                                  "1" = "Connait le guide"),
+                       range = c(0.2, 1)) +
+  labs(title="Connaissance du guide selon le nombre\nd'années depuis l'arrivée au Canada",
+       x="Nombre d'années",
+       y="Nombre de répondants") +
+  scale_y_continuous(limits=c(0,30), breaks=seq(0, 30, by=5)) +
+  geom_text(data = Graph3 %>% drop_na(prop),
+            aes(y = total + 1, label = paste0(round(prop), "%")))
+
+ggsave("_SharedFolder_Guide_mve/graphs/ses_immigrant_yearXconnaissance.png", 
+       width = 10, height = 8)
+
+Data %>% 
+  group_by(guide_connaitre, ses_immigrant_year2) %>% 
+  summarise(n = n()) %>% 
+  group_by(guide_connaitre) %>% 
+  mutate(total = sum(n),
+         prop = n/total*100,
+         guide_connaitre = factor(guide_connaitre, levels = c("0", "1"))) %>% 
+  ungroup() %>% 
+  mutate(prop = ifelse(guide_connaitre == 1, prop, NA)) %>% 
+  drop_na(ses_immigrant_year2)

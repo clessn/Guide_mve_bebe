@@ -156,17 +156,17 @@ sumcum <- Data %>%
   mutate(sumcum = cumsum(n))
 
 ggplot(Data, aes(x=ses_immigrant_year)) +
-  geom_bar(data = cumsum, aes(x = ses_immigrant_year,
+  geom_bar(data = sumcum, aes(x = ses_immigrant_year,
                               y = sumcum),
            stat = "identity",
-           fill = "grey", alpha = 0.6) +
-  geom_bar(fill="#FFC300", width=0.3) +
+           fill = "grey", alpha = 0.6,
+           width = 0.5) +
+  geom_bar(fill="#FFC300", width=0.7) +
   #scale_x_discrete(limits=c("1-5", "6-10", "11-15", "16-20", "21-25", "26-30", "30+")) +
-  scale_y_continuous(limits=c(0,30), breaks=seq(0, 30, by=5)) +
+  #scale_y_continuous(limits=c(0,30), breaks=seq(0, 30, by=5)) +
   labs(title="Années depuis l'arrivée au Québec", x="Nombre d'années", y="Nombre de répondants") +
   clessnverse::theme_clean_light(base_size = 16) +
   theme(plot.title = element_text(size = 19))
-
 
 
 ggsave("_SharedFolder_Guide_mve/graphs/ses_immigrant_year2.png", 
@@ -177,24 +177,42 @@ ggsave("_SharedFolder_Guide_mve/graphs/ses_immigrant_year2.png",
 # Reshape the data
 table(Data$ses_immigrant_year)
 
-#Data$ses_immigrant_year[Data$ses_immigrant_year >= 1 & Data$ses_immigrant_year <= 5] <- "1-5" 
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 6] <- "6-10"
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 7] <- "6-10"
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 8] <- "6-10"
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 9] <- "6-10"
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 10] <- "6-10"
-#Data$ses_immigrant_year[Data$ses_immigrant_year >= 11 & Data$ses_immigrant_year <= 15] <- "11-15" 
-#Data$ses_immigrant_year[Data$ses_immigrant_year >= 16 & Data$ses_immigrant_year <= 20] <- "16-20" 
-#Data$ses_immigrant_year[Data$ses_immigrant_year >= 21 & Data$ses_immigrant_year <= 25] <- "21-25" 
-#Data$ses_immigrant_year[Data$ses_immigrant_year >= 26 & Data$ses_immigrant_year <= 30] <- "26-30"
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 33] <- "30+"
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 34] <- "30+"
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 35] <- "30+"
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 38] <- "30+"
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 41] <- "30+"
-#Data$ses_immigrant_year[Data$ses_immigrant_year == 42] <- "30+"
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 1 & Data$ses_immigrant_year <= 5] <- "1-5" 
+Data$ses_immigrant_year[Data$ses_immigrant_year == 6] <- "6-10"
+Data$ses_immigrant_year[Data$ses_immigrant_year == 7] <- "6-10"
+Data$ses_immigrant_year[Data$ses_immigrant_year == 8] <- "6-10"
+Data$ses_immigrant_year[Data$ses_immigrant_year == 9] <- "6-10"
+Data$ses_immigrant_year[Data$ses_immigrant_year == 10] <- "6-10"
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 11 & Data$ses_immigrant_year <= 15] <- "11-15" 
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 16 & Data$ses_immigrant_year <= 20] <- "16-20" 
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 21 & Data$ses_immigrant_year <= 25] <- "21-25" 
+Data$ses_immigrant_year[Data$ses_immigrant_year >= 26 & Data$ses_immigrant_year <= 30] <- "26-30"
+Data$ses_immigrant_year[Data$ses_immigrant_year == 33] <- "30+"
+Data$ses_immigrant_year[Data$ses_immigrant_year == 34] <- "30+"
+Data$ses_immigrant_year[Data$ses_immigrant_year == 35] <- "30+"
+Data$ses_immigrant_year[Data$ses_immigrant_year == 38] <- "30+"
+Data$ses_immigrant_year[Data$ses_immigrant_year == 41] <- "30+"
+Data$ses_immigrant_year[Data$ses_immigrant_year == 42] <- "30+"
 
+table(Data$ses_immigrant_year)
 
+graph_ses_imm <- Data %>% 
+  group_by(ses_immigrant_year) %>% 
+  summarise(n = n()) %>% 
+  drop_na()
+
+ggplot(graph_ses_imm, aes(x=ses_immigrant_year, y = n)) +
+  geom_bar(fill="#FFC300",
+           stat = "identity") +
+  scale_x_discrete(limits=c("1-5", "6-10", "11-15", "16-20", "21-25", "26-30", "30+")) +
+  scale_y_continuous(limits=c(0,30), breaks=seq(0, 30, by=5)) +
+  labs(title="Années depuis l'arrivée au Canada\n", x="Nombre d'années", y="Nombre de répondants") +
+  geom_text(aes(y = n + 1, label = paste0("n = ", n))) +
+  clessnverse::theme_clean_light(base_size = 16) +
+  theme(plot.title = element_text(size = 19))
+
+ggsave("_SharedFolder_Guide_mve/graphs/ses_immigrant_year.png", 
+       width = 10, height = 8)
 
 #_______________________________________________________________________________
 
