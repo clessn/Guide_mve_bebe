@@ -246,3 +246,12 @@ Les répondants ont une préférence claire pour le format papier. Plus de la mo
 ![](../Guide_mve_bebe/_SharedFolder_Guide_mve/graphs/ses_immigrant_yearXconnaissance.png)
 
 Parmi les 73 répondants immigrants du sondage, 42 d'entre eux (soit 58 %) sont arrivés au Canada il y a moins de 10 ans. Cependant, 71% des immigrants qui ne connaissent pas le guide sont également ici depuis 10 ans et moins. Ce groupe est moins enclin à connaitre le guide par rapport aux immigrants qui restent au Canada depuis plus longtemps.
+
+\newpage
+# Méthodologie de la collecte de données
+
+La population visée était les parents québécois de jeunes enfants ou enceinte. Initialement, l'échantillon visé était environ de 500 parents, avec une sous-représentation d'au moins 100 femmes enceintes pour la première fois. La collecte s'est arrêtée à 929 répondants, après avoir atteint le quota souhaité le 11 août. 798 sont parents, dont 200 enceintes, et 124 pour la première fois. La collecte a été effectuée via la firme de sondage Léger, à l'aide de leur panel. Les répondants ne correspondant pas aux critères souhaités ont été triés à l'aide d'une question au début du questionnaire. Le questionnaire a été distribué par le web.
+
+# Méthodologie de l'analyse de données
+
+L'objectif de ce rapport était de fournir un aperçu descriptif global des jeunes parents québécois. Premièrement, des analyses univariées sont effectuées sur les variables liées aux caractéristiques des répondants. Ces premières analyses permettent d'obtenir un portrait social et démographique des jeunes parents. La deuxième partie des analyses pose deux variables dépendantes: la connaissance du guide MVE et sa consultation. Ces deux variables dépendantes sont croisées avec les caractéristiques du répondant afin d'offrir des hypothèses préliminaires pour des analyses futures plus approfondies.

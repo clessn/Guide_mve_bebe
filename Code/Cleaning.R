@@ -423,6 +423,17 @@ Clean$guide_format_essmostlywebpdf[Raw$guide_format_ess == "Principalement le fo
 Clean$guide_format_essmostlywebhtml <- 0
 Clean$guide_format_essmostlywebhtml[Raw$guide_format_ess == "Principalement le format web HTML"] <- 1
 
+Clean$guide_format_ess_test <- 0
+Clean$guide_format_ess_test[Raw$guide_format_ess == "Les deux formats -papier et web- de façon égale"] <- 1
+Clean$guide_format_ess_test[Raw$guide_format_ess == "Uniquement le format papier"] <- 2
+Clean$guide_format_ess_test[Raw$guide_format_ess == "Principalement le format papier"] <- 3
+Clean$guide_format_ess_test[Raw$guide_format_ess == "Uniquement le format web PDF"] <- 4
+Clean$guide_format_ess_test[Raw$guide_format_ess == "Uniquement le format web HTML"] <- 5
+Clean$guide_format_ess_test[Raw$guide_format_ess == "Principalement le format web PDF"] <- 6
+Clean$guide_format_ess_test[Raw$guide_format_ess == "Principalement le format web HTML"] <- 7
+
+table(Clean$guide_format_ess)
+
 table(Raw$guide_satisfaction_1)
 
 Clean$guide_satisfaction_1paper <- NA
@@ -723,13 +734,15 @@ Clean$ses_persoincome <- NA
 Clean$ses_persoincome[Raw$ses_income_1 %in% c("Moins de 10,000 $", "10,000 $ à 14,999 $", "15,000 $ à 29,999 $", "30,000 $ à 39,999 $")] <- 0
 Clean$ses_persoincome[Raw$ses_income_1 %in% c("40,000 $ à 59,999 $", "60,000 $ à 79,999 $", "80,000 $ à 99,999 $")] <- 0.5
 Clean$ses_persoincome[Raw$ses_income_1 %in% c("100,000 $ et plus")] <- 1
-
+table(Clean$ses_persoincome)
 
 table(Raw$ses_income_2)
 Clean$ses_houseincome <- NA
 Clean$ses_houseincome[Raw$ses_income_2 %in% c("Moins de 10,000 $", "10,000 $ à 14,999 $", "15,000 $ à 29,999 $", "30,000 $ à 39,999 $")] <- 0
 Clean$ses_houseincome[Raw$ses_income_2 %in% c("40,000 $ à 59,999 $", "60,000 $ à 79,999 $", "80,000 $ à 99,999 $")] <- 0.5
 Clean$ses_houseincome[Raw$ses_income_2 %in% c("100,000 $ et plus")] <- 1
-
+table(Clean$ses_houseincome)
 
 saveRDS(Clean, "_SharedFolder_Guide_mve/data/clean.rds")
+
+
