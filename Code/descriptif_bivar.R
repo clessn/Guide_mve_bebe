@@ -334,10 +334,8 @@ ggsave("_SharedFolder_Guide_mve/graphs/ses_immigrant_yearXconnaissance.png",
 Data %>% 
   group_by(guide_connaitre, ses_immigrant_year2) %>% 
   summarise(n = n()) %>% 
+  drop_na() %>% 
   group_by(guide_connaitre) %>% 
   mutate(total = sum(n),
          prop = n/total*100,
-         guide_connaitre = factor(guide_connaitre, levels = c("0", "1"))) %>% 
-  ungroup() %>% 
-  mutate(prop = ifelse(guide_connaitre == 1, prop, NA)) %>% 
-  drop_na(ses_immigrant_year2)
+         guide_connaitre = factor(guide_connaitre, levels = c("0", "1")))

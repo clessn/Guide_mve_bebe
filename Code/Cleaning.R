@@ -4,7 +4,7 @@
 
 library(dplyr)
 library(tidyverse)
-rstudioapi::writeRStudioPreference("data_viewer_max_columns", 1000L)
+#rstudioapi::writeRStudioPreference("data_viewer_max_columns", 1000L)
 # Raw data --------------------------------------------------------------------
 
 Raw <- read.csv("_SharedFolder_Guide_mve/data/INSPQ-guide-mve_RAW.csv", encoding = "UTF-8") %>% 
@@ -406,33 +406,76 @@ Clean$relatives_web_formatpdfhtml[Raw$relatives_format == "PDF"] <- 0
 Clean$relatives_web_formatpdfhtml[Raw$relatives_format == "HTML"] <- 0.25
 Clean$relatives_web_formatpdfhtml[Raw$relatives_format == "Les deux formats (PDF et HTML) de façon égale"] <- 0.5
 
+
+#### Guide format essentiel
 table(Raw$guide_format_ess)
 
-Clean$guide_format_esspapierweb <- 0
-Clean$guide_format_esspapierweb[Raw$guide_format_ess == "Les deux formats -papier et web- de façon égale"] <- 1
-Clean$guide_format_esssolopaper <- 0
-Clean$guide_format_esssolopaper[Raw$guide_format_ess == "Uniquement le format papier"] <- 1
-Clean$guide_format_essmostlypaper <- 0
-Clean$guide_format_essmostlypaper[Raw$guide_format_ess == "Principalement le format papier"] <- 1
-Clean$guide_format_esssolowebpdf <- 0
-Clean$guide_format_esssolowebpdf[Raw$guide_format_ess == "Uniquement le format web PDF"] <- 1
-Clean$guide_format_esssolowebhtml <- 0
-Clean$guide_format_esssolowebhtml[Raw$guide_format_ess == "Uniquement le format web HTML"] <- 1
-Clean$guide_format_essmostlywebpdf <- 0
-Clean$guide_format_essmostlywebpdf[Raw$guide_format_ess == "Principalement le format web PDF"] <- 1
-Clean$guide_format_essmostlywebhtml <- 0
-Clean$guide_format_essmostlywebhtml[Raw$guide_format_ess == "Principalement le format web HTML"] <- 1
+#Clean$guide_format_esspapierweb <- 0
+#Clean$guide_format_esspapierweb[Raw$guide_format_ess == "Les deux formats -papier et web- de façon égale"] <- 1
+#Clean$guide_format_esssolopaper <- 0
+#Clean$guide_format_esssolopaper[Raw$guide_format_ess == "Uniquement le format papier"] <- 1
+#Clean$guide_format_essmostlypaper <- 0
+#Clean$guide_format_essmostlypaper[Raw$guide_format_ess == "Principalement le format papier"] <- 1
+#Clean$guide_format_esssolowebpdf <- 0
+#Clean$guide_format_esssolowebpdf[Raw$guide_format_ess == "Uniquement le format web PDF"] <- 1
+#Clean$guide_format_esssolowebhtml <- 0
+#Clean$guide_format_esssolowebhtml[Raw$guide_format_ess == "Uniquement le format web HTML"] <- 1
+#Clean$guide_format_essmostlywebpdf <- 0
+#Clean$guide_format_essmostlywebpdf[Raw$guide_format_ess == "Principalement le format web PDF"] <- 1
+#Clean$guide_format_essmostlywebhtml <- 0
+#Clean$guide_format_essmostlywebhtml[Raw$guide_format_ess == "Principalement le format web HTML"] <- 1
 
-Clean$guide_format_ess_test <- 0
-Clean$guide_format_ess_test[Raw$guide_format_ess == "Les deux formats -papier et web- de façon égale"] <- 1
-Clean$guide_format_ess_test[Raw$guide_format_ess == "Uniquement le format papier"] <- 2
-Clean$guide_format_ess_test[Raw$guide_format_ess == "Principalement le format papier"] <- 3
-Clean$guide_format_ess_test[Raw$guide_format_ess == "Uniquement le format web PDF"] <- 4
-Clean$guide_format_ess_test[Raw$guide_format_ess == "Uniquement le format web HTML"] <- 5
-Clean$guide_format_ess_test[Raw$guide_format_ess == "Principalement le format web PDF"] <- 6
-Clean$guide_format_ess_test[Raw$guide_format_ess == "Principalement le format web HTML"] <- 7
+### papier
+Clean$guide_format_ess_papier <- NA
+Clean$guide_format_ess_papier[Raw$guide_format_ess %in% c("Uniquement le format web PDF",
+                                                          "Uniquement le format web HTML",
+                                                          "Principalement le format web PDF",
+                                                          "Principalement le format web HTML")] <- "all_other"
+Clean$guide_format_ess_papier[Raw$guide_format_ess == "Les deux formats -papier et web- de façon égale"] <- "paper_and_web"
+Clean$guide_format_ess_papier[Raw$guide_format_ess == "Principalement le format papier"] <- "mostly"
+Clean$guide_format_ess_papier[Raw$guide_format_ess == "Uniquement le format papier"] <- "only"
+Clean$guide_format_ess_papier <- factor(Clean$guide_format_ess_papier,
+       levels = c("all_other", "paper_and_web", "mostly", "only"))
+table(Clean$guide_format_ess_papier, useNA = "always")
 
-table(Clean$guide_format_ess)
+### pdf
+Clean$guide_format_ess_pdf <- NA
+Clean$guide_format_ess_pdf[Raw$guide_format_ess %in% c("Uniquement le format papier",
+                                                          "Uniquement le format web HTML",
+                                                          "Principalement le format papier",
+                                                          "Principalement le format web HTML")] <- "all_other"
+Clean$guide_format_ess_pdf[Raw$guide_format_ess == "Les deux formats -papier et web- de façon égale"] <- "paper_and_web"
+Clean$guide_format_ess_pdf[Raw$guide_format_ess == "Principalement le format web PDF"] <- "mostly"
+Clean$guide_format_ess_pdf[Raw$guide_format_ess == "Uniquement le format web PDF"] <- "only"
+Clean$guide_format_ess_pdf <- factor(Clean$guide_format_ess_pdf,
+                                        levels = c("all_other", "paper_and_web", "mostly", "only"))
+table(Clean$guide_format_ess_pdf, useNA = "always")
+
+### html
+Clean$guide_format_ess_html <- NA
+Clean$guide_format_ess_html[Raw$guide_format_ess %in% c("Uniquement le format papier",
+                                                       "Uniquement le format web PDF",
+                                                       "Principalement le format papier",
+                                                       "Principalement le format web PDF")] <- "all_other"
+Clean$guide_format_ess_html[Raw$guide_format_ess == "Les deux formats -papier et web- de façon égale"] <- "paper_and_web"
+Clean$guide_format_ess_html[Raw$guide_format_ess == "Principalement le format web HTML"] <- "mostly"
+Clean$guide_format_ess_html[Raw$guide_format_ess == "Uniquement le format web HTML"] <- "only"
+Clean$guide_format_ess_html <- factor(Clean$guide_format_ess_html,
+                                     levels = c("all_other", "paper_and_web", "mostly", "only"))
+table(Clean$guide_format_ess_html, useNA = "always")
+table(Clean$guide_format_ess_pdf, useNA = "always")
+table(Clean$guide_format_ess_papier, useNA = "always")
+
+#Clean$guide_format_ess <- 0
+#Clean$guide_format_ess[Raw$guide_format_ess == "Les deux formats -papier et web- de façon égale"] <- 1
+#Clean$guide_format_ess[Raw$guide_format_ess == "Uniquement le format papier"] <- 2
+#Clean$guide_format_ess[Raw$guide_format_ess == "Principalement le format papier"] <- 3
+#Clean$guide_format_ess[Raw$guide_format_ess == "Uniquement le format web PDF"] <- 4
+#Clean$guide_format_ess[Raw$guide_format_ess == "Uniquement le format web HTML"] <- 5
+#Clean$guide_format_ess[Raw$guide_format_ess == "Principalement le format web PDF"] <- 6
+#Clean$guide_format_ess[Raw$guide_format_ess == "Principalement le format web HTML"] <- 7
+#
+#table(Clean$guide_format_ess)
 
 table(Raw$guide_satisfaction_1)
 
@@ -596,7 +639,12 @@ Clean$ses_age50[Raw$ses_age == "50 ou plus"] <-1
 table(Clean$ses_age1829)
 table(Clean$ses_age3039)
 table(Clean$ses_age4049)
-table(Clean$ses_age50)   
+table(Clean$ses_age50)  
+
+## as factor
+Clean$ses_age <- factor(Raw$ses_age,
+                           levels = c("18-29", "30-39", "40-49"))
+table(Clean$ses_age)
 
 table(Raw$ses_sex_ori)
 
@@ -743,6 +791,6 @@ Clean$ses_houseincome[Raw$ses_income_2 %in% c("40,000 $ à 59,999 $", "60,000 $ 
 Clean$ses_houseincome[Raw$ses_income_2 %in% c("100,000 $ et plus")] <- 1
 table(Clean$ses_houseincome)
 
-saveRDS(Clean, "_SharedFolder_Guide_mve/data/clean.rds")
+saveRDS(Clean, paste0("_SharedFolder_Guide_mve/data/clean_", Sys.Date(), ".rds"))
 
 
