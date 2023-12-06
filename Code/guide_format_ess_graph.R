@@ -20,7 +20,7 @@ table(Data$guide_format_ess_pdf)
 # Univarié ----------------------------------------------------------------
 
 Graph1 <- Data %>% 
-  pivot_longer(., cols = starts_with("guide_format_ess"),
+  tidyr::pivot_longer(., cols = starts_with("guide_format_ess"),
                names_to = "format",
                names_prefix = "guide_format_ess_") %>% 
   mutate(value2 = case_when(
@@ -31,7 +31,7 @@ Graph1 <- Data %>%
   ))
 
 Graph1 %>% 
-  drop_na(value) %>% 
+  tidyr::drop_na(value) %>% 
   mutate(format = as.character(format),
          format = ifelse(value == "paper_and_web", "", format),
          value = ifelse(value == "paper_and_web", "Papier et\nweb également", value),
@@ -44,6 +44,7 @@ Graph1 %>%
          format = factor(format, levels = c("", "Papier", "HTML", "PDF"))) %>% 
   group_by(format, value) %>% 
   summarise(n = n()) %>%
+  mutate(ypos = ifelse(n <= 15, n + 7, n - 7)) %>% 
   ggplot(aes(x = value, y = n)) +
   facet_grid(cols = vars(format),
              scales = "free_x",
@@ -52,6 +53,8 @@ Graph1 %>%
   geom_bar(stat = "identity",
            aes(fill = value), color = NA,
            show.legend = FALSE) +
+  geom_text(aes(y = ypos, label = n),
+            size = 3.25) +
   scale_fill_manual(values = c("Papier et\nweb également" = "#7D7D7D",  # Gris
                                "1" = "#C34A36",  # Rouge
                                "3" = "#E1C340",  # Jaune
@@ -71,7 +74,7 @@ ggsave("_SharedFolder_Guide_mve/graphs/apres_vente/univarie.png",
 # essentiel X income ------------------------------------------------------
 
 Graph2 <- Data %>% 
-  pivot_longer(., cols = starts_with("guide_format_ess"),
+  tidyr::pivot_longer(., cols = starts_with("guide_format_ess"),
                names_to = "format",
                names_prefix = "guide_format_ess_") %>% 
   mutate(value2 = case_when(
@@ -82,7 +85,7 @@ Graph2 <- Data %>%
   ))
 
 Graph2 %>% 
-  drop_na(value, ses_houseincome) %>% 
+  tidyr::drop_na(value, ses_houseincome) %>% 
   mutate(format = as.character(format),
          format = ifelse(value == "paper_and_web", "", format),
          value = ifelse(value == "paper_and_web", "Papier et\nweb également", value),
@@ -104,7 +107,11 @@ Graph2 %>%
                                              "Élevé\n(100 000$ et plus)"))) %>% 
   filter(value != "1") %>% 
   group_by(format, value, ses_houseincome) %>% 
-  summarise(n = n()) %>%
+  summarise(n = n(), .groups = "drop") %>%
+  tidyr::complete(format, value, ses_houseincome, fill = list(n = 0)) %>% 
+  filter(!(format == "" & value %in% c("3", "4")) &
+           !(format != "" & value == "Papier et\nweb également")) %>% 
+  mutate(vj = ifelse(n <= 15, -1, 2)) %>% 
   ggplot(aes(x = value, y = n)) +
   facet_grid(cols = vars(format),
              rows = vars(ses_houseincome),
@@ -118,6 +125,9 @@ Graph2 %>%
                                "1" = "#C34A36",  # Rouge
                                "3" = "#E1C340",  # Jaune
                                "4" = "#4DAF7C")) +
+  geom_text(aes(y = n, label = n,
+                vjust = vj),
+            size = 2.5) +
   scale_x_discrete(labels = c("1" = "Autre format", "3" = "Principalement", "4" = "Uniquement")) +
   scale_y_continuous(expand = c(0, 0)) +
   xlab("") +
@@ -136,7 +146,7 @@ ggsave("_SharedFolder_Guide_mve/graphs/apres_vente/essXincome.png",
 # age X income ------------------------------------------------------
 
 Graph3 <- Data %>% 
-  pivot_longer(., cols = starts_with("guide_format_ess"),
+  tidyr::pivot_longer(., cols = starts_with("guide_format_ess"),
                names_to = "format",
                names_prefix = "guide_format_ess_") %>% 
   mutate(value2 = case_when(
@@ -147,7 +157,7 @@ Graph3 <- Data %>%
   ))
 
 Graph3 %>% 
-  drop_na(value, ses_age) %>% 
+  tidyr::drop_na(value, ses_age) %>% 
   mutate(format = as.character(format),
          format = ifelse(value == "paper_and_web", "", format),
          value = ifelse(value == "paper_and_web", "Papier et\nweb également", value),
@@ -161,6 +171,7 @@ Graph3 %>%
   filter(value != "1") %>% 
   group_by(format, value, ses_age) %>% 
   summarise(n = n()) %>%
+  mutate(vj = ifelse(n <= 15, -1, 2)) %>% 
   ggplot(aes(x = value, y = n)) +
   facet_grid(cols = vars(format),
              rows = vars(ses_age),
@@ -170,6 +181,9 @@ Graph3 %>%
   geom_bar(stat = "identity",
            aes(fill = value), color = NA,
            show.legend = FALSE) +
+  geom_text(aes(y = n, label = n,
+                vjust = vj),
+            size = 2.5) +
   scale_fill_manual(values = c("Papier et\nweb également" = "#7D7D7D",  # Gris
                                "1" = "#C34A36",  # Rouge
                                "3" = "#E1C340",  # Jaune
