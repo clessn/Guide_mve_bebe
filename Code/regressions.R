@@ -1,5 +1,6 @@
 # Packages ----------------------------------------------------------------
 library(tidyverse)
+
 # Data --------------------------------------------------------------------
 Data <- readRDS("_SharedFolder_Guide_mve/data/clean.rds")
 
@@ -217,6 +218,14 @@ graph <- df_fin %>%
       yparent_status == "parent_preg" ~ "Enceintes,\ndéjà parents"
       )
     )
+
+graph %>% 
+  rename(Revenu = ses_houseincome,
+         StatutParent = yparent_status,
+         ProbMoyenne = mean,
+         BorneInferieure95 = low,
+         BorneSuperieure95 = high) %>%
+  writexl::write_xlsx(., "_SharedFolder_Guide_mve/graphs/13_connaitreXstatus.xlsx")
 
 ggplot(graph, aes(x = mean, y = yparent_status)) +
   geom_pointrange(aes(xmin = low,
