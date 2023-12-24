@@ -2,7 +2,7 @@
 library(tidyverse)
 
 # Data --------------------------------------------------------------------
-Data <- readRDS("_SharedFolder_Guide_mve/data/clean.rds")
+Data <- readRDS("_SharedFolder_Guide_mve/data/clean_2023-12-20.rds")
 
 ## guide_format_change - Le remplacement du format papier du guide « Mieux vivre avec notre enfant » par le format web serait-il avantageux pour vous?
 
@@ -98,7 +98,10 @@ data_density_read <- Data %>%
   filter(!is.na(Proportion_Read))
 
 # Création du graphique à crêtes
-ggplot(data_density_read, aes(x = Proportion_Read, y = factor(Format, levels = c("guide_web_prop", "guide_paper_prop"), labels = c("Web", "Papier")), fill = Format, color = Format)) +
+ggplot(data_density_read, aes(x = Proportion_Read,
+                              y = factor(Format, levels = c("guide_web_prop", "guide_paper_prop"),
+                                         labels = c("Web", "Papier")),
+                              fill = Format, color = Format)) +
   ggridges::geom_density_ridges(
     scale = 0.5,
     rel_min_height = 0.01,
@@ -119,6 +122,15 @@ ggplot(data_density_read, aes(x = Proportion_Read, y = factor(Format, levels = c
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
   clessnverse::theme_clean_light()
+
+exactnumbers <- Data %>%
+  select(guide_paper_prop, guide_web_prop)
+
+quantile(exactnumbers$guide_paper_prop, c(0.25, 0.5, 0.75),
+         na.rm = TRUE)
+
+quantile(exactnumbers$guide_web_prop, c(0.25, 0.5, 0.75),
+         na.rm = TRUE)
 
 ggsave("_SharedFolder_Guide_mve/graphs/6guide_prop_density.png", 
        width = 10, height = 8)
@@ -190,6 +202,13 @@ ggplot(data_density, aes(x = as.numeric(Satisfaction), y = factor(Format, levels
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank()) +
   clessnverse::theme_clean_light()
+
+quantile(as.numeric(Data$guide_satisfaction_1paper), c(0.25, 0.5, 0.75),
+         na.rm = TRUE)
+
+quantile(as.numeric(Data$guide_satisfaction_web), c(0.25, 0.5, 0.75),
+         na.rm = TRUE)
+
 
 ggsave("_SharedFolder_Guide_mve/graphs/7guide_satisfaction'density.png", 
        width = 10, height = 8)
